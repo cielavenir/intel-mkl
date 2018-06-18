@@ -10,10 +10,16 @@ Files:     install_GUI.sh
            silent.cfg
 Copyright: 2017 Intel Corporation.
 License:   INTEL_LICENSE_INSTALLER
+Comments:
+ Intel's installer used several open-source software.
+ The justifications can be found under
+ .
+   opt/intel/parallel_studio_xe_2018.3.051/uninstall/licenses
+   pset/licenses
 
 Files:     rpm/*
            PUBLIC_KEY.PUB
-Copyright: 2018 Intel Corporation.
+Copyright: 1999-2018 Intel Corporation.
 # INTEL_SIMPLIFIED_SOFTWARE_LICENSE, abbr. ISSL
 License:   INTEL_SIMPLIFIED_SOFTWARE_LICENSE
 Comments:  Exceptions
