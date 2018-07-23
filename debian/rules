@@ -39,7 +39,7 @@ autogen: extract-rpms $(AUTOGEN_FILES)
 	chmod +x debian/libmkl-dev.postinst debian/libmkl-dev.prerm  debian/libmkl-dev.config
 
 override_dh_auto_configure: autogen
-	python3 debian/control.py  # Generate install files and lintian overrides
+	LC_ALL=C.UTF-8 python3 debian/control.py  # Generate install files and lintian overrides
 
 	# deal with embedded libjs-jquery
 	$(RM) opt/intel/documentation_2018/ja/mkl/ps2018/resources/jquery-1.11.1.min.js
