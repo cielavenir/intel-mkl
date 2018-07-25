@@ -1,7 +1,8 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: mkl
 Source: https://software.intel.com/en-us/mkl
-# FIXME: Please actually /explain/ why the package is in non-free in debian/copyright.
+Comment: This package is non-free software as per DFSG.
+ * Source Code. The source code of "intel-mkl" is not available.
 
 
 Files:     install_GUI.sh
