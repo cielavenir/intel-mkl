@@ -16,6 +16,7 @@ Standards-Version: 4.1.4
 Homepage: https://software.intel.com/en-us/mkl
 Vcs-Browser: https://salsa.debian.org/science-team/intel-mkl
 Vcs-Git: https://salsa.debian.org/science-team/intel-mkl.git
+XS-Autobuild: yes
 
 # [ References ]
 # 1. https://github.com/intel/mkl-dnn/issues/206
