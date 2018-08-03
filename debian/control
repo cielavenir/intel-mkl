@@ -5,14 +5,15 @@ Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.
 Uploaders: Mo Zhou <cdluminate@gmail.com>,
 Build-Depends: debhelper (>=11~),
                dh-exec,
-# My script control.py requires python3 >= 3.6
+# The script control.py requires python3 >= 3.6 .
+# but you can patch it with debian/bpo.patch to support python3 >= 3.5 .
                python3 (>= 3.6),
                rpm,
                cpio,
                rpm2cpio,
                debconf,
                po-debconf,
-Standards-Version: 4.1.4
+Standards-Version: 4.2.0
 Homepage: https://software.intel.com/en-us/mkl
 Vcs-Browser: https://salsa.debian.org/science-team/intel-mkl
 Vcs-Git: https://salsa.debian.org/science-team/intel-mkl.git
