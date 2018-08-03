@@ -3,8 +3,12 @@ intel-mkl (2018.3.222-2) UNRELEASED; urgency=medium
   * Fix FTBFS (UnicodeDecodeError) in C locale. (Closes: #904434)
   * Explicitly explain why this package is non-free.
   * Mark the source package as XS-Autobuild: yes.
+  * Move the cross-arch (i386) dependencies from Depends to Suggests in
+    order to unblock migration to testing.
+  * Provide patch debian/bpo.patch to support Python3.5, for backporters.
+    This patch is not enabled by default. (Closes: #904320)
 
- -- Mo Zhou <cdluminate@gmail.com>  Fri, 03 Aug 2018 05:03:52 +0000
+ -- Mo Zhou <cdluminate@gmail.com>  Fri, 03 Aug 2018 06:29:41 +0000
 
 intel-mkl (2018.3.222-1) unstable; urgency=low
 
