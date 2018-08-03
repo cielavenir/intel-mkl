@@ -123,9 +123,9 @@ Multi-Arch: same
 Depends: ${misc:Depends},
          intel-mkl               (= ${binary:Version}),
          intel-mkl-cluster       (= ${binary:Version}),
-         intel-mkl-linktool:i386 (= ${binary:Version}),
          libmkl-full-dev         (= ${binary:Version}),
          intel-mkl-doc           (= ${source:Version}),
+Suggests: intel-mkl-linktool:i386 (= ${binary:Version}),
 Recommends: hpcc,
 Description: Intel® Math Kernel Library (Intel® MKL) (Full)
  Intel® Math Kernel Library (Intel® MKL) is a computing math library of highly
@@ -164,14 +164,14 @@ Depends: ${shlibs:Depends},
          ${misc:Depends},
          libmkl-dev                      (= ${binary:Version}),
          libmkl-rt:amd64                 (= ${binary:Version}),
-         libmkl-rt:i386                  (= ${binary:Version}),
          libmkl-interface-dev:amd64      (= ${binary:Version}),
-         libmkl-interface-dev:i386       (= ${binary:Version}),
          libmkl-threading-dev:amd64      (= ${binary:Version}),
-         libmkl-threading-dev:i386       (= ${binary:Version}),
          libmkl-computational-dev:amd64  (= ${binary:Version}),
-         libmkl-computational-dev:i386   (= ${binary:Version}),
 Suggests: intel-mkl-doc                  (= ${source:Version}),
+          libmkl-rt:i386                  (= ${binary:Version}),
+          libmkl-interface-dev:i386       (= ${binary:Version}),
+          libmkl-threading-dev:i386       (= ${binary:Version}),
+          libmkl-computational-dev:i386   (= ${binary:Version}),
 # Copied from here: https://software.intel.com/en-us/mkl-linux-developer-guide-2019-beta
 # Upstream revision: 062
 Description: Intel® Math Kernel Library (Intel® MKL) (Full Version Dev)
