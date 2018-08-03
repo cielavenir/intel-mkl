@@ -299,7 +299,7 @@ Description: Static libs of intel-MKL: Cluster
 
 Package: libmkl-locale
 Section: non-free/misc
-Architecture: any
+Architecture: amd64 i386
 Multi-Arch: foreign
 Depends: ${misc:Depends},
 Description: Intel MKL: Locale Files Used by All Shared Objects
