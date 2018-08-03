@@ -24,7 +24,8 @@ AUTOGEN_FILES       = $(patsubst %.in, %, $(wildcard debian/*.in debian/pkgconfi
 
 .PHONY: checksum extract-rpms autogen
 checksum:
-	md5sum -c debian/intel-mkl.md5
+	@-md5sum -c debian/intel-mkl.md5 || \
+		echo "[1;31mERROR, md5sum check failed for some reason.[;m"
 
 extract-rpms: checksum
 	#https://www.centos.org/docs/5/html/Deployment_Guide-en-US/s1-check-rpm-sig.html
