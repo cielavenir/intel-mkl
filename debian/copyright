@@ -3,6 +3,7 @@ Upstream-Name: mkl
 Source: https://software.intel.com/en-us/mkl
 Comment: This package is non-free software as per DFSG.
  * Source Code. The source code of "intel-mkl" is not available.
+   The source package of intel-mkl contains binary blobs from Intel.
 
 
 Files:     install_GUI.sh
