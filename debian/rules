@@ -30,7 +30,7 @@ checksum:
 extract-rpms: checksum
 	#https://www.centos.org/docs/5/html/Deployment_Guide-en-US/s1-check-rpm-sig.html
 	# FIXME: how to verify rpm's signature with upstream public key?
-	set -e; for rpmfile in $$(find rpm -type f -name '*.rpm'); do \
+	set -e; for rpmfile in $$(find rpm -type f -name '*.rpm' | sort); do \
 		rpm -K --nosignature $$rpmfile; \
 		rpm2cpio $$rpmfile | cpio -idmv; \
 		done
