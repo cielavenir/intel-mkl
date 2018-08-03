@@ -1,0 +1,92 @@
+diff --git a/debian/control.py b/debian/control.py
+index ba9244d..947d0ae 100755
+--- a/debian/control.py
++++ b/debian/control.py
+@@ -2,11 +2,6 @@
+ # Helper Script for INTEL-MKL Packaging
+ # Copyright (C) 2018 Mo Zhou <cdluminate@gmail.com>
+ # MIT License
+-# FIXME: Backporters, please notice that this script utilized one of the
+-#        python3.6 features (format string, i.g. f''). That means this script
+-#        requires python >= 3.6 . I'm sorry for the inconvenience but I like
+-#        this feature so much ... Type annotation for python >= 3.5 is also
+-#        used ...
+ import os, re, sys, subprocess, glob, copy
+ from typing import *
+ 
+@@ -22,7 +17,7 @@ def getDpkgArchitecture(query: str) -> str:
+     '''
+     dpkg-architecture -qQUERY
+     '''
+-    result = subprocess.Popen(['dpkg-architecture', f'-q{query}'],
++    result = subprocess.Popen(['dpkg-architecture', '-q{query}'.format(query=query)],
+              stdout=subprocess.PIPE).communicate()[0].decode().strip()
+     return result
+ 
+@@ -56,11 +51,11 @@ def installFile(fpath: str, package: str, dest: str = '') -> None:
+     the file to dest.
+     '''
+     if package not in parsePackages():
+-        raise Exception(f'Package [{package}] is not found in debian/control!' +
+-                f' cannot install {fpath}')
+-    print(f'installing {fpath} ➜ {package}')
+-    with open(os.path.join('debian', f'{package}.install'), 'a') as f:
+-        f.write(f'{fpath}\t{dest}\n' if dest else f'{fpath}')
++        raise Exception('Package [{package}] is not found in debian/control!'.format(package=package) +
++                ' cannot install {fpath}'.format(fpath=fpath))
++    print('installing {fpath} ➜ {package}'.format(fpath=fpath, package=package))
++    with open(os.path.join('debian', '{package}.install'.format(package=package)), 'a') as f:
++        f.write('{fpath}\t{dest}\n'.format(fpath=fpath, dest=dest) if dest else '{fpath}'.format(fpath=fpath))
+ 
+ 
+ def installSharedObjects(filelist: List[str],
+@@ -92,7 +87,7 @@ def installSharedObjects(filelist: List[str],
+         path, fname = os.path.dirname(so), os.path.basename(so)
+         package = re.sub('\.so$', '', fname).replace('_', '-')
+         installFile(os.path.join(path, fname), package,
+-                f'usr/lib/{deb_host_multiarch}/')
++                'usr/lib/{deb_host_multiarch}/'.format(deb_host_multiarch=deb_host_multiarch))
+     return rest
+ 
+ 
+@@ -135,7 +130,7 @@ def installStaticLibs(filelist: List[str],
+         else:
+             package = 'no-such-package'
+         installFile(os.path.join(path, fname), package,
+-                    f'usr/lib/{deb_host_multiarch}/')
++                    'usr/lib/{deb_host_multiarch}/'.format(deb_host_multiarch=deb_host_multiarch))
+     return rest
+ 
+ 
+@@ -229,17 +224,17 @@ def installDebianSpecific(deb_host_arch: str, deb_host_multiarch: str) -> None:
+     '''
+     install debian specific files that come from debian/
+     '''
+-    dest = f'/usr/lib/{deb_host_multiarch}/pkgconfig/'
+-    installFile('debian/pkgconfig/*.pc', f'libmkl-dev', dest)
++    dest = '/usr/lib/{deb_host_multiarch}/pkgconfig/'.format(deb_host_multiarch=deb_host_multiarch)
++    installFile('debian/pkgconfig/*.pc', 'libmkl-dev', dest)
+ 
+ 
+ def _override(package: str, overrides: List[str]) -> None:
+     '''
+     Write a lintian override file for specified package
+     '''
+-    overrides = [f'# Automatically overridden by {__file__}'] + overrides
+-    print(f'lintian overrides for {package} ...')
+-    with open(f'debian/{package}.lintian-overrides', 'a') as f:
++    overrides = ['# Automatically overridden by {__file__}'.format(__file__=__file__)] + overrides
++    print('lintian overrides for {package} ...'.format(package=package))
++    with open('debian/{package}.lintian-overrides'.format(package=package), 'a') as f:
+         f.writelines(x + '\n' for x in overrides)
+ 
+ 
+@@ -326,7 +321,7 @@ if __name__ == '__main__':
+     installDebianSpecific(host_arch, host_multiarch)
+ 
+     # just like what dh-missing --list-missing does.
+-    print(f'{len(allfiles)} / {num_allfiles} Files left uninstalled.')
++    print('{lenallfiles} / {num_allfiles} Files left uninstalled.'.format(lenallfiles=len(allfiles), num_allfiles=num_allfiles))
+     if dhVerbose():
+         for f in allfiles: print('missing', '<><><>', f)
+     # notes about missing files:
