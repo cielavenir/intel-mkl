@@ -230,7 +230,7 @@ Depends: ${shlibs:Depends},
 Recommends: libomp-dev,
 Enhances: libblas.so,
           liblapack.so,
-Recommends: intel-mkl-doc         (= ${source:Version}),
+Suggests: intel-mkl-doc         (= ${source:Version}),
 Description: Intel® Math Kernel Library (Intel® MKL) (Dev)
  Intel® Math Kernel Library (Intel® MKL) is a computing math library of highly
  optimized, extensively threaded routines for applications that require
