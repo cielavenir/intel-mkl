@@ -126,7 +126,7 @@ Depends: ${misc:Depends},
          intel-mkl-cluster       (= ${binary:Version}),
          libmkl-full-dev         (= ${binary:Version}),
          intel-mkl-doc           (= ${source:Version}),
-Recommends: intel-mkl-linktool:i386 (= ${binary:Version}),
+Recommends: intel-mkl-linktool (= ${binary:Version}),
 Suggests: hpcc,
 Description: Intel® Math Kernel Library (Intel® MKL) (Full)
  Intel® Math Kernel Library (Intel® MKL) is a computing math library of highly

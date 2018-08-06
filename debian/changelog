@@ -1,7 +1,7 @@
 intel-mkl (2018.3.222-3) UNRELEASED; urgency=medium
 
-  * Update Recommends and Suggests fields.
-  * Strip explicit architecture specification (:amd64) from Depends.
+  * Update Depends, Recommends and Suggests fields, and strip unnecessary
+    explicit architecture specifications (:amd64, :i386).
 
  -- Mo Zhou <cdluminate@gmail.com>  Sun, 05 Aug 2018 10:04:42 +0000
 
