@@ -1,9 +1,9 @@
-intel-mkl (2018.3.222-3) UNRELEASED; urgency=medium
+intel-mkl (2018.3.222-3) unstable; urgency=medium
 
   * Update Depends, Recommends and Suggests fields, and strip unnecessary
     explicit architecture specifications (:amd64, :i386) from these fields.
 
- -- Mo Zhou <cdluminate@gmail.com>  Sun, 05 Aug 2018 10:04:42 +0000
+ -- Mo Zhou <cdluminate@gmail.com>  Tue, 07 Aug 2018 07:06:58 +0000
 
 intel-mkl (2018.3.222-2) unstable; urgency=medium
 
