@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: intel-mkl\n"
 "Report-Msgid-Bugs-To: intel-mkl@packages.debian.org\n"
 "POT-Creation-Date: 2018-06-16 10:31+0000\n"
-"PO-Revision-Date: 2018-04-29 02:35:0000\n"
+"PO-Revision-Date: 2018-08-23 02:35:0000\n"
 "Last-Translator: Mo Zhou <cdluminate@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -19,7 +19,7 @@ msgstr ""
 #. Description
 #: ../libmkl-rt.templates:1001
 msgid "Intel Math Kernel Library (Intel MKL)"
-msgstr ""
+msgstr "英特尔数学核函数库 (Intel MKL)"
 
 #. Type: boolean
 #. Description
@@ -62,7 +62,7 @@ msgstr ""
 #. Description
 #: ../libmkl-rt.templates:2001
 msgid "    https://www.gnu.org/licenses/gpl-faq.html#GPLIncompatibleLibs"
-msgstr ""
+msgstr "    https://www.gnu.org/licenses/gpl-faq.html#GPLIncompatibleLibs"
 
 #. Type: boolean
 #. Description
