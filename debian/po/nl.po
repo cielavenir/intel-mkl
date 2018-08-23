@@ -1,0 +1,114 @@
+# Dutch translation of intel-mkl debconf templates.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the intel-mkl package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Frans Spiesschaert <Frans.Spiesschaert@yucom.be>, 2018.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: intel-mkl\n"
+"Report-Msgid-Bugs-To: intel-mkl@packages.debian.org\n"
+"POT-Creation-Date: 2018-06-16 10:31+0000\n"
+"PO-Revision-Date: 2018-07-31 17:29+0200\n"
+"Last-Translator: Frans Spiesschaert <Frans.Spiesschaert@yucom.be>\n"
+"Language-Team: Debian Dutch l10n Team <debian-l10n-dutch@lists.debian.org>\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Gtranslator 2.91.7\n"
+
+#. Type: title
+#. Description
+#: ../libmkl-rt.templates:1001
+msgid "Intel Math Kernel Library (Intel MKL)"
+msgstr ""
+"Intel's kernelbibliotheek voor mathematica (Intel Math Kernel Library - "
+"Intel MKL)"
+
+#. Type: boolean
+#. Description
+#: ../libmkl-rt.templates:2001
+msgid "Use libmkl_rt.so as the default alternative to BLAS/LAPACK?"
+msgstr "libmkl_rt.so gebruiken als het standaardalternatief voor BLAS/LAPACK?"
+
+#. Type: boolean
+#. Description
+#: ../libmkl-rt.templates:2001
+msgid ""
+"Intel MKL's Single Dynamic Library (SDL) is installed on your machine. This "
+"shared object can be used as an alternative to both libblas.so.3 and "
+"liblapack.so.3, so that packages built against BLAS/LAPACK can directly use "
+"MKL without rebuild."
+msgstr ""
+"De enkelvoudige dynamische bibliotheek van Intel's MKL (Intel MKL's Single "
+"Dynamic Library - SDL) is geïnstalleerd op uw machine. Dit gedeeld object "
+"kan gebruikt worden als alternatief voor zowel libblas.so.3 als liblapack."
+"so.3, zodat pakketten die gebouwd werden tegen BLAS/LAPACK zonder herbouwen "
+"onmiddellijk MKL kunnen gebruiken."
+
+#. Type: boolean
+#. Description
+#: ../libmkl-rt.templates:2001
+msgid ""
+"However, MKL is non-free software, and in particular its source code is not "
+"publicly available. By using MKL as the default BLAS/LAPACK implementation, "
+"you might be violating the licensing terms of copyleft software that would "
+"become dynamically linked against it. Please verify that the licensing terms "
+"of the program(s) that you intend to use with MKL are compatible with the "
+"MKL licensing terms. For the case of software under the GNU General Public "
+"License, you may want to read this FAQ:"
+msgstr ""
+"Evenwel is MKL niet-vrije software en in het bijzonder is de broncode ervan "
+"niet publiekelijk beschikbaar. Door MKL te gebruiken als de standaard BLAS/"
+"LAPACK-implementatie schendt u mogelijk de licentiebepalingen van copyleft-"
+"software die er dynamisch mee gelinkt zou worden. Gelieve na te gaan of de "
+"licentiebepalingen van de programma's die u zinnens bent te gebruiken met "
+"MKL, compatibel zijn met de licentiebepalingen van MKL. Waar het software "
+"betreft die onder de GNU General Public License valt, kunt u deze FAQ "
+"raadplegen:"
+
+#. Type: boolean
+#. Description
+#: ../libmkl-rt.templates:2001
+msgid "    https://www.gnu.org/licenses/gpl-faq.html#GPLIncompatibleLibs"
+msgstr "    https://www.gnu.org/licenses/gpl-faq.html#GPLIncompatibleLibs"
+
+#. Type: boolean
+#. Description
+#: ../libmkl-rt.templates:2001
+msgid ""
+"If you don't know what MKL is, or unwilling to set it as default, just "
+"choose the preset value or simply type Enter."
+msgstr ""
+"Indien u niet weet wat MKL is, of ze niet als standaard wenst in te stellen, "
+"kiest u eenvoudig de reeds ingevulde waarde of drukt u gewoon op Enter."
+
+#. Type: multiselect
+#. Description
+#: ../libmkl-rt.templates:3001
+msgid "Which of the these alternatives should point to MKL?"
+msgstr "Welke van deze alternatieven moet wijzen naar MKL?"
+
+#. Type: multiselect
+#. Description
+#: ../libmkl-rt.templates:3001
+msgid ""
+"Please select the alternatives that should point to MKL. The selection "
+"applies to all available architectures, and the related development packages "
+"will follow the same selection."
+msgstr ""
+"Selecteer de alternatieven die naar MKL moeten wijzen. De selectie geldt "
+"voor alle beschikbare architecturen, en de ermee verband houdende "
+"ontwikkelingspakketten zullen diezelfde selectie volgen."
+
+#. Type: multiselect
+#. Description
+#: ../libmkl-rt.templates:3001
+msgid ""
+"Typically the user may want to point both BLAS/LAPACK to MKL (libmkl_rt.so). "
+"Type Enter if you are not sure what to select."
+msgstr ""
+"Gewoonlijk zal de gebruiker BLAS/LAPACK beide willen laten wijzen naar MKL "
+"(libmkl_rt.so). Druk op Enter als u niet zeker weet wat te selecteren."
