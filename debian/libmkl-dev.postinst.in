@@ -36,12 +36,12 @@ if [ "$RET" = "true" ]; then
   echo "Setting MKL as default BLAS/LAPACK implementation as requested." 1>&2
   db_get libmkl-rt/exact-so-3-selections
 
-  if (echo "$RET" | grep "libblas.so" 2>&1 1>/dev/null); then
+  if (echo "$RET" | grep "libblas.so" 1>/dev/null 2>&1); then
   update-alternatives --set libblas.so-@DEB_HOST_MULTIARCH@ \
                       /usr/lib/@DEB_HOST_MULTIARCH@/libmkl_rt.so
   fi
 
-  if (echo "$RET" | grep "liblapack.so" 2>&1 1>/dev/null); then
+  if (echo "$RET" | grep "liblapack.so" 1>/dev/null 2>&1); then
   update-alternatives --set liblapack.so-@DEB_HOST_MULTIARCH@ \
                       /usr/lib/@DEB_HOST_MULTIARCH@/libmkl_rt.so
   fi
