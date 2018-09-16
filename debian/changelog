@@ -6,6 +6,8 @@ intel-mkl (2018.3.222-4) UNRELEASED; urgency=medium
     Thanks to jean-pierre giraud <jean-pierregiraud@neuf.fr>
   * [po] Add Dutch translation for debconf messages. (Closes: #906947)
     Thanks to Frans Spiesschaert <Frans.Spiesschaert@yucom.be>
+  * [po] Add German translation for debconf messages. (Closes: #908926)
+    Thanks to Helge Kreutzmann <debian@helgefjell.de>.
 
  -- Mo Zhou <cdluminate@gmail.com>  Thu, 23 Aug 2018 05:35:10 +0000
 
