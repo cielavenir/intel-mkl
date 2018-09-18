@@ -1,6 +1,8 @@
 intel-mkl (2018.3.222-4) UNRELEASED; urgency=medium
 
   * Verify RPM signature with the given public key before extraction.
+  * Fix wrong shell redirection in libmkl-rt's postinst. (Closes: #908240)
+  * Fix wrong shell redirection in libmkl-dev's postinst. (Closes: #908244)
   * [po] Update Simplified Chinese translation.
   * [po] Add French translation for debconf messages. (Closes: #906732)
     Thanks to jean-pierre giraud <jean-pierregiraud@neuf.fr>
@@ -9,7 +11,7 @@ intel-mkl (2018.3.222-4) UNRELEASED; urgency=medium
   * [po] Add German translation for debconf messages. (Closes: #908926)
     Thanks to Helge Kreutzmann <debian@helgefjell.de>.
 
- -- Mo Zhou <cdluminate@gmail.com>  Thu, 23 Aug 2018 05:35:10 +0000
+ -- Mo Zhou <cdluminate@gmail.com>  Tue, 18 Sep 2018 15:41:42 +0000
 
 intel-mkl (2018.3.222-3) unstable; urgency=medium
 
