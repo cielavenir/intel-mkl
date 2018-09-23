@@ -39,6 +39,48 @@ for libblas in BLASES
 	end
 end
 
+julia_sgemm = false
+for libblas in BLASES
+	global julia_sgemm
+	@eval begin
+		function ffi_gemm!(transA::Char, transB::Char,
+						   alpha::Float32, A::AbstractVecOrMat{Float32},
+						   B::AbstractVecOrMat{Float32}, beta::Float32,
+						   C::AbstractVecOrMat{Float32})
+			m = size(A, transA == 'N' ? 1 : 2)
+            ka = size(A, transA == 'N' ? 2 : 1)
+            kb = size(B, transB == 'N' ? 1 : 2)
+            n = size(B, transB == 'N' ? 2 : 1) 
+            ccall((:sgemm_, $libblas), Cvoid,
+                (Ref{UInt8}, Ref{UInt8}, Ref{Int32}, Ref{Int32},
+                 Ref{Int32}, Ref{Float32}, Ptr{Float32}, Ref{Int32},
+                 Ptr{Float32}, Ref{Int32}, Ref{Float32}, Ptr{Float32},
+                 Ref{Int32}),
+                 transA, transB, m, n,
+                 ka, alpha, A, max(1,stride(A,2)),
+                 B, max(1,stride(B,2)), beta, C,
+                 max(1,stride(C,2)))
+		end
+	end
+	x, y, z = rand(Float32, N3, N3), rand(Float32, N3, N3), zeros(Float32, N3, N3)
+	if !julia_sgemm
+		@info("sgemm Julia")
+		BLAS.gemm('N', 'N', x, y)  # JIT
+		@time BLAS.gemm('N', 'N', x, y)
+		julia_sgemm = true
+	end
+	@info("sgemm $libblas")
+	ffi_gemm!('N', 'N', 1. |>Float32, x, y, 0. |>Float32, z)  # JIT
+	@time ffi_gemm!('N', 'N', 1. |>Float32, x, y, 0. |> Float32, z)
+
+	z2 = BLAS.gemm('N', 'N', x, y)
+	ffi_gemm!('N', 'N', 1. |>Float32, x, y, 0. |>Float32, z)
+	error = norm(z2 - z)
+	if error > 1e-7
+		@warn("sgemm Error : $error")  # correctness
+	end
+end
+
 julia_dgemm = false
 for libblas in BLASES
 	global julia_dgemm
