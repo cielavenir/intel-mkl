@@ -11,11 +11,12 @@ const netlibblas = "/usr/lib/x86_64-linux-gnu/blas/libblas.so.3.8.0"
 const atlas      = "/usr/lib/x86_64-linux-gnu/atlas/libblas.so.3.10.3"
 const openblas   = "/usr/lib/x86_64-linux-gnu/openblas/libblas.so.3"
 const mkl        = "/usr/lib/x86_64-linux-gnu/libmkl_rt.so"
+const nvblas     = "/usr/lib/x86_64-linux-gnu/libnvblas.so"
 const blis       = "/home/lumin/git/blis/lib/haswell/libblis.so"
 
-BLASES = [blis, openblas, mkl]
+BLASES = [blis, openblas, mkl, nvblas]
 
-for N3 in 2 .^ [1:12...]
+for N3 in 2 .^ [1:13...]
 	julia_dgemm = false
 	@warn("Matrix size = $N3")
 	for libblas in BLASES
