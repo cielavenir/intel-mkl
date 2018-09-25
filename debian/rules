@@ -7,14 +7,16 @@
 # pile of *.install files. Here all the *.install files are auto-generated
 # from python script debian/control.py .
 
-MKL_ORIG_TARBALL = l_mkl_2018.3.222.tgz
+MKL_ORIG_TARBALL = l_mkl_2019.0.117.tgz
 
 # debugging i386 builds on amd64. [not formal cross build but dirty hack]
 #export DEB_HOST_ARCH = i386
 #export DEB_HOST_MULTIARCH = i386-linux-gnu
 
+export LC_ALL       = C.UTF-8
 DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
 AUTOGEN_FILES       = $(patsubst %.in, %, $(wildcard debian/*.in debian/pkgconfig/*.in))
+
 
 %:: %.in debian/rules
 	sed -e "s/@DEB_HOST_MULTIARCH@/$(DEB_HOST_MULTIARCH)/g" < $@.in > $@
@@ -29,6 +31,7 @@ checksum:
 
 extract-rpms: checksum
 	rpm --import PUBLIC_KEY.PUB
+	rpm -qa
 	rpm -qi gpg-pubkey-1911e097-57eb894d
 	set -e; for rpmfile in $$(find rpm -type f -name '*.rpm' | sort); do \
 		rpm -K $$rpmfile; \
@@ -41,21 +44,18 @@ autogen: extract-rpms $(AUTOGEN_FILES)
 	chmod +x debian/libmkl-dev.postinst debian/libmkl-dev.prerm  debian/libmkl-dev.config
 
 override_dh_auto_configure: autogen
-	LC_ALL=C.UTF-8 python3 debian/control.py  # Generate install files and lintian overrides
+	python3 debian/control.py  # Generate install files and lintian overrides
 
 	# deal with embedded libjs-jquery
-	$(RM) opt/intel/documentation_2018/ja/mkl/ps2018/resources/jquery-1.11.1.min.js
-	$(RM) opt/intel/documentation_2018/en/mkl/ps2018/resources/jquery-1.11.1.min.js
+	$(RM) opt/intel/documentation_2019/en/mkl/ps2019/resources/jquery-1.11.1.min.js
 	ln -s /usr/share/javascript/jquery/jquery.min.js \
-		opt/intel/documentation_2018/ja/mkl/ps2018/resources/jquery-1.11.1.min.js
-	ln -s /usr/share/javascript/jquery/jquery.min.js \
-		opt/intel/documentation_2018/en/mkl/ps2018/resources/jquery-1.11.1.min.js
+		opt/intel/documentation_2019/en/mkl/ps2019/resources/jquery-1.11.1.min.js
 
 override_dh_auto_clean:
 	debconf-updatepo
 	-$(RM) debian/*.install  # auto-generated install files
 	-$(RM) debian/*.lintian-overrides  # auto-generated lintian files
-	-$(RM) debian/*.postinst debian/*.prerm debian/*.config  # auto-gen maintainer scripts
+	-$(RM) debian/*.postinst debian/*.prerm debian/*.config  # auto-gen
 	-$(RM) debian/pkgconfig/mkl-static*.pc  # auto-gen
 	-$(RM) -rf debian/__pycache__
 	-$(RM) -rf opt  # extracted from upstream rpm packages

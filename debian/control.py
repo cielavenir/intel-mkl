@@ -190,13 +190,9 @@ def installCatalog(filelist: List[str],
     # find opt -type f -name '*.cat' -exec md5sum '{}' \;
     # amd64 and i386 message catalog files are the same.
     if 'amd64' == deb_host_arch:
-        installFile('opt/intel/compilers_and_libraries_*/linux/mkl/lib/intel64_lin/locale/ja_JP/mkl_msg.cat',
-                    'libmkl-locale', 'usr/share/locale/ja_JP/')
         installFile('opt/intel/compilers_and_libraries_*/linux/mkl/lib/intel64_lin/locale/en_US/mkl_msg.cat',
                     'libmkl-locale', 'usr/share/locale/en_US/')
     else: # i386
-        installFile('opt/intel/compilers_and_libraries_*/linux/mkl/lib/ia32_lin/locale/ja_JP/mkl_msg.cat',
-                    'libmkl-locale', 'usr/share/locale/ja_JP/')
         installFile('opt/intel/compilers_and_libraries_*/linux/mkl/lib/ia32_lin/locale/en_US/mkl_msg.cat',
                     'libmkl-locale', 'usr/share/locale/en_US/')
     return rest
