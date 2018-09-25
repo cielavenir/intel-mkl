@@ -231,14 +231,15 @@ def installDebianSpecific(deb_host_arch: str, deb_host_multiarch: str) -> None:
     '''
     print('# Debian Specific')
     dest = f'/usr/lib/{deb_host_multiarch}/pkgconfig/'
-    installFile('debian/pkgconfig/*.pc', f'libmkl-dev', dest)
+    installFile('debian/pkgconfig/*.pc', 'libmkl-dev', dest)
 
 
 def _override(package: str, overrides: List[str]) -> None:
     '''
     Write a lintian override file for specified package
     '''
-    overrides = [f'# Automatically overridden by {__file__}'] + overrides
+    __file = __file__
+    overrides = [f'# Automatically overridden by {__file}'] + overrides
     print(f'lintian overrides for {package} ...')
     with open(f'debian/{package}.lintian-overrides', 'a') as f:
         f.writelines(x + '\n' for x in overrides)
@@ -331,7 +332,8 @@ if __name__ == '__main__':
     installDebianSpecific(host_arch, host_multiarch)
 
     # just like what dh-missing --list-missing does.
-    print(f'{len(allfiles)} / {num_allfiles} Files left uninstalled.')
+    num_remaining = len(allfiles)
+    print('{num_remaining} / {num_allfiles} Files left uninstalled.'.format(**locals()))
     if dhVerbose():
         for f in allfiles: print('missing', '<><><>', f)
     # notes about missing files:
