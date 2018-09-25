@@ -11,6 +11,8 @@ intel-mkl (2019.0.117-1) UNRELEASED; urgency=medium
   * Remove bpo.patch and provide control.bpo.py which automatically
     converts control.py to support python3.5 (for stretch-backports).
   * Copyright update: ISSL updated to April 2018 Version.
+  * Autopkgtest: Add a simple level3 blas (dgemm) sanity test.
+  * Bump Standards-Version to 4.2.1 (no change).
 
   [ Localization Updates ]
   * Update Simplified Chinese translation.
@@ -23,7 +25,7 @@ intel-mkl (2019.0.117-1) UNRELEASED; urgency=medium
   * Add Portuguese translation for debconf messages. (Closes:#909528)
     Thanks to Traduz PT <traduz@debianpt.org>
 
- -- Mo Zhou <cdluminate@gmail.com>  Tue, 25 Sep 2018 05:23:41 +0000
+ -- Mo Zhou <cdluminate@gmail.com>  Tue, 25 Sep 2018 05:42:17 +0000
 
 intel-mkl (2018.3.222-3) unstable; urgency=medium
 
