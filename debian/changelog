@@ -1,3 +1,12 @@
+intel-mkl (2019.0.117-2~bpo9+1) stretch-backports; urgency=medium
+
+  * Downgrade python3 requirement to (>= 3.5)
+  * Downgrade debhelper compat level to 10.
+  * Enable control.bpo.py script in rules.
+  * Backport to stretch.
+
+ -- Mo Zhou <cdluminate@gmail.com>  Tue, 25 Sep 2018 08:19:29 +0000
+
 intel-mkl (2019.0.117-2) unstable; urgency=medium
 
   * Export HOME=/tmp/ to fix FTBFS due to the failure that rpm would

@@ -45,7 +45,7 @@ autogen: extract-rpms $(AUTOGEN_FILES)
 	chmod +x debian/libmkl-dev.postinst debian/libmkl-dev.prerm  debian/libmkl-dev.config
 
 override_dh_auto_configure: autogen
-	#python3 debian/control.bpo.py  # Patch control.py to support python3.5
+	python3 debian/control.bpo.py  # Patch control.py to support python3.5
 	python3 debian/control.py  # Generate install files and lintian overrides
 
 	# deal with embedded libjs-jquery

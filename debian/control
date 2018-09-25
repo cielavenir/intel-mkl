@@ -3,11 +3,11 @@ Section: non-free/science
 Priority: optional
 Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
 Uploaders: Mo Zhou <cdluminate@gmail.com>,
-Build-Depends: debhelper (>=11~),
+Build-Depends: debhelper (>=10~),
                dh-exec,
 # The script control.py requires python3 >= 3.6 .
 # but you can patch it with debian/bpo.patch to support python3 >= 3.5 .
-               python3 (>= 3.6),
+               python3 (>= 3.5),
                rpm,
                cpio,
                rpm2cpio,
