@@ -352,3 +352,6 @@ TODO List
       /usr/include/fftw3.h       (from: libfftw3-dev)
 
   If we move the MKL headers out from a private directory.
+
+* [wontfix] symbols control file. None of the shared object has SONAME.
+  And dpkg-gensymbols won't generate symbols list. (dpkg-gensymbols)
