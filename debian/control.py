@@ -2,11 +2,6 @@
 # Helper Script for INTEL-MKL Packaging
 # Copyright (C) 2018 Mo Zhou <cdluminate@gmail.com>
 # MIT License
-# FIXME: Backporters, please notice that this script utilized one of the
-#        python3.6 features (format string, i.g. f''). That means this script
-#        requires python >= 3.6 . I'm sorry for the inconvenience but I like
-#        this feature so much ... Type annotation for python >= 3.5 is also
-#        used ...
 import os, re, sys, subprocess, glob, copy
 from typing import *
 
