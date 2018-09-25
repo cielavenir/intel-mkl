@@ -4,6 +4,8 @@ intel-mkl (2019.0.117-1) UNRELEASED; urgency=medium
   * Verify RPM signature with the given public key before extraction.
   * Update control.py for the 2019.0.117 release.
   * Update README.Debian, and merge TODO into it.
+  * Monitoring https://pypi.org/project/mkl/ for updates via watch.
+    Note that pypi is not where the real source package comes from.
   * Fix wrong shell redirection in libmkl-rt's postinst. (Closes: #908240)
   * Fix wrong shell redirection in libmkl-dev's postinst. (Closes: #908244)
   * [po] Update Simplified Chinese translation.
@@ -16,7 +18,7 @@ intel-mkl (2019.0.117-1) UNRELEASED; urgency=medium
   * [po] Add Portuguese translation for debconf messages. (Closes:#909528)
     Thanks to Traduz PT <traduz@debianpt.org>
 
- -- Mo Zhou <cdluminate@gmail.com>  Tue, 25 Sep 2018 02:12:58 +0000
+ -- Mo Zhou <cdluminate@gmail.com>  Tue, 25 Sep 2018 02:37:51 +0000
 
 intel-mkl (2018.3.222-3) unstable; urgency=medium
 
