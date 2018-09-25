@@ -58,7 +58,7 @@ def installFile(fpath: str, package: str, dest: str = '') -> None:
     if package not in parsePackages():
         raise Exception(f'Package [{package}] is not found in debian/control!' +
                 f' cannot install {fpath}')
-    print(f'installing {fpath} ➜ {package}')
+    print(f'Installing {fpath} ➜ {package}')
     with open(os.path.join('debian', f'{package}.install'), 'a') as f:
         f.write(f'{fpath}\t{dest}\n' if dest else f'{fpath}')
 
@@ -70,6 +70,7 @@ def installSharedObjects(filelist: List[str],
     for them. The filtered list that does not contain .so file will be returned.
     When verbose is toggled, it prints .so files ignored.
     '''
+    print('# Shared Objects')
     # lookup arch info
     deb_host_arch = getDpkgArchitecture('DEB_HOST_ARCH')
     deb_host_multiarch = getDpkgArchitecture('DEB_HOST_MULTIARCH')
@@ -79,14 +80,12 @@ def installSharedObjects(filelist: List[str],
     # filter the lib list by architecture
     if deb_host_arch == 'amd64':
         _, libs = eGrep(libs, '.*ia32.*')
-        _, libs = eGrep(libs, '.*intel64_lin.*')  # Dedup
     else:
         _, libs = eGrep(libs, '.*intel64.*')
-        _, libs = eGrep(libs, '.*ia32_lin.*')  # Dedup
     # report dropped files
     for lib in solibs:
         if lib not in libs and verbose:
-            print('Ignoring', lib)
+            print('Ignored', lib)
     # now let's install them !
     for so in libs:
         path, fname = os.path.dirname(so), os.path.basename(so)
@@ -103,6 +102,7 @@ def installStaticLibs(filelist: List[str],
     .install files. A list contains no .a file will be returned.
     When verbose is toggled, it prints ignored static libs.
     '''
+    print('# Static Libraries')
     # lookup arch info
     deb_host_arch = getDpkgArchitecture('DEB_HOST_ARCH')
     deb_host_multiarch = getDpkgArchitecture('DEB_HOST_MULTIARCH')
@@ -112,14 +112,12 @@ def installStaticLibs(filelist: List[str],
     # filter the lib list by architecture
     if deb_host_arch == 'amd64':
         libs = [x for x in libs if 'ia32' not in x]
-        libs = [x for x in libs if 'intel64_lin' not in x] # dedup
     else:
         libs = [x for x in libs if 'intel64' not in x]
-        libs = [x for x in libs if 'ia32_lin' not in x] # dedup
     # report static libs being dropped
     for lib in alibs:
         if lib not in libs and verbose:
-            print('Ignoring', lib)
+            print('Ignored', lib)
     # now let's install them !
     for so in libs:
         path, fname = os.path.dirname(so), os.path.basename(so)
@@ -145,6 +143,7 @@ def installIncludes(filelist: List[str],
     Install docs and return the filtered list.
     Print ignored files when verbose is set.
     '''
+    print('# Headers')
     _, rest = eGrep(filelist, '.*/linux/mkl/include/.*')
     incs = 'opt/intel/compilers_and_libraries_*/linux/mkl/include/*'
     installFile(incs, 'libmkl-dev', 'usr/include/mkl/')
@@ -156,6 +155,7 @@ def installTools(filelist: List[str],
     '''
     Install tools. Argument is similary to previous functions.
     '''
+    print('# Tools')
     _, rest = eGrep(filelist, '.*/linux/mkl/tools/.*')
     installFile(
             'opt/intel/compilers_and_libraries_*/linux/mkl/tools/mkl_link_tool',
@@ -171,11 +171,12 @@ def installDocs(filelist: List[str],
     '''
     similar to previous functions.
     '''
+    print('# Documentation')
     _, rest = eGrep(filelist, '^opt/intel/documentation.*')
     _, rest = eGrep(rest, '^opt/intel/samples.*')
-    installFile('opt/intel/documentation_2018',
+    installFile('opt/intel/documentation_*',
                 'intel-mkl-doc', 'usr/share/doc/intel-mkl/')
-    installFile('opt/intel/samples_2018',
+    installFile('opt/intel/samples_*',
                 'intel-mkl-doc', 'usr/share/doc/intel-mkl/')
     return rest
 
@@ -185,6 +186,7 @@ def installCatalog(filelist: List[str],
     '''
     similar to previous functions
     '''
+    print('# Message Catalog')
     deb_host_arch = getDpkgArchitecture('DEB_HOST_ARCH')
     _, rest = eGrep(filelist, '.*\.cat$')
     # find opt -type f -name '*.cat' -exec md5sum '{}' \;
@@ -202,6 +204,7 @@ def installExamples(filelist: List[str]) -> List[str]:
     '''
     similar to previous
     '''
+    print('# Examples')
     exs, rest = eGrep(filelist, '.*/linux/mkl/examples/.*')
     for ex in exs:
         installFile(ex, 'intel-mkl-doc', 'usr/share/intel-mkl/')
@@ -212,6 +215,7 @@ def installBenchmarks(filelist: List[str]) -> List[str]:
     '''
     similar to previous
     '''
+    print('# Benchmarks')
     _, rest = eGrep(filelist, '.*/linux/mkl/benchmarks/.*')
     # hpcg is ignored.
     # - because I didn't find the way to build them without Intel C++ compiler.
@@ -225,6 +229,7 @@ def installDebianSpecific(deb_host_arch: str, deb_host_multiarch: str) -> None:
     '''
     install debian specific files that come from debian/
     '''
+    print('# Debian Specific')
     dest = f'/usr/lib/{deb_host_multiarch}/pkgconfig/'
     installFile('debian/pkgconfig/*.pc', f'libmkl-dev', dest)
 
@@ -295,8 +300,12 @@ if __name__ == '__main__':
     allfiles = sorted(glob.glob('opt/**', recursive=True))
     num_allfiles = len(allfiles)
 
-    # Remove directories from file list
+    # Remove directories from file list, and don't follow symlink
     allfiles = [x for x in allfiles if not os.path.isdir(x)]
+    for dirname in set(map(os.path.dirname, allfiles)):
+        if os.path.islink(dirname):
+            print(dirname, 'is a symlink, we do not follow it')
+            _, allfiles = eGrep(allfiles, f'{dirname}/.*')
 
     # [ Filter files that we never wanted ]
     # -- upstream installer stuff. we don't need
