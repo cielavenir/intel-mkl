@@ -14,6 +14,7 @@ MKL_ORIG_TARBALL = l_mkl_2019.0.117.tgz
 #export DEB_HOST_MULTIARCH = i386-linux-gnu
 
 export LC_ALL       = C.UTF-8
+export HOME         = /tmp/
 DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
 AUTOGEN_FILES       = $(patsubst %.in, %, $(wildcard debian/*.in debian/pkgconfig/*.in))
 
