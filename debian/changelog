@@ -1,10 +1,10 @@
-intel-mkl (2019.0.117-2) UNRELEASED; urgency=medium
+intel-mkl (2019.0.117-2) unstable; urgency=medium
 
   * Export HOME=/tmp/ to fix FTBFS due to the failure that rpm would
     attempt to store GPG key used for verifying rpm packages under
     /sbuild-nonexistent/.rpmdb directory without a proper HOME.
 
- -- Mo Zhou <cdluminate@gmail.com>  Wed, 26 Sep 2018 02:13:05 +0000
+ -- Mo Zhou <cdluminate@gmail.com>  Wed, 26 Sep 2018 02:46:51 +0000
 
 intel-mkl (2019.0.117-1) unstable; urgency=medium
 
@@ -62,6 +62,6 @@ intel-mkl (2018.3.222-2) unstable; urgency=medium
 intel-mkl (2018.3.222-1) unstable; urgency=low
 
   * Initial release. (Closes: #895881)
-  * Many thanks to Sébastien Villemot's for helpful advices.
+  * Many thanks to Sébastien Villemot for helpful advices.
 
  -- Mo Zhou <cdluminate@gmail.com>  Mon, 18 Jun 2018 11:57:36 +0000
