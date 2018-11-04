@@ -2,7 +2,7 @@
                  Tips about Using Debian's MKL Package / FAQ
 ===============================================================================
 
-                    -- Mo Zhou <cdluminate@gmail.com>, Last Update: May 11 2018
+                    -- Mo Zhou <cdluminate@gmail.com>, Last Update: Nov 04 2018
 
 Table of Contents
 
@@ -53,7 +53,7 @@ How to install these MKL Debian packages?
     This is only available on amd64. It's the top level metapackage for amd64.
 
 (4) If you want to simply add a new alternative to libblas.so.3 and
-    liblapack.so.3, without any header file:
+    liblapack.so.3, without any development file:
 
       $ sudo apt install libmkl-rt
 
@@ -85,9 +85,7 @@ call is able to find the message catalog:
 
    $ export NLSPATH=/usr/share/locale/en_US/%N:$NLSPATH
 
-Or $ export NLSPATH=/usr/share/locale/ja_JP/%N:$NLSPATH if your locale is ja_JP.
 There is a file debian/tests/catalog.cc for testing catopen.
-
 Apart from NLSPATH, the other environment variables prepared by upstream
 scripts such as mklvars.sh are generally not needed.
 
@@ -95,14 +93,12 @@ scripts such as mklvars.sh are generally not needed.
 MKL performance tips
 -------------------------------------------------------------------------------
 
-Upstream's doc about performance and memory:
-
 https://software.intel.com/en-us/mkl-linux-developer-guide-managing-performance-and-memory
 
-Here are some points from package maintainer:
+https://software.intel.com/en-us/mkl-linux-developer-guide-improving-performance-for-small-size-problems
 
-1. If your program computes weirdly slow with MKL, the following points
-   may be helpful for you to find out the root of problem.
+If your program computes weirdly slow with MKL, the following points
+may be helpful for you to find out the root of problem.
 
    * Set MKL_THREADING_LAYER=sequential environment variable if you
      are calling MKL from a multi-threading application.
@@ -112,11 +108,6 @@ Here are some points from package maintainer:
    * Check if libgomp and libiomp5 are used at the same time.
 
    * For small size problems:
-     https://software.intel.com/en-us/mkl-linux-developer-guide-improving-performance-for-small-size-problems
-
-   * ...
-
-   * Refer to upstream doc.
 
 2. libmkl_rt.so is a magical run-time dispatcher which detects your
    CPU capacity at run time, and automatically selects shared objects
