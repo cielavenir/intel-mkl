@@ -10,7 +10,7 @@
 
 // This file is used to test correctness of cblas header / library packaging.
 // Although can be used as a very rough benchmarker.
-// g++ testdgemm.cc $(pkg-config --libs --cflags mkl-rt)
+// g++ test-gemm.cc $(pkg-config --libs --cflags mkl-rt)
 
 const int iteration = 5; // how many iterations would you like to run
 const int repeat = 100; // repeat several times in each iteration
