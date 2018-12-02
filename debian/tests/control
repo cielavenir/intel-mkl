@@ -1,3 +1,3 @@
-Test-Command: g++ debian/tests/testdgemm.cc -I/usr/include/mkl -lmkl_rt -lpthread -lm -ldl -o test; ./test
+Test-Command: g++ debian/tests/test-gemm.cc -I/usr/include/mkl -lmkl_rt -lpthread -lm -ldl -o test; ./test
 Depends: intel-mkl, build-essential,
 Restrictions: allow-stderr
