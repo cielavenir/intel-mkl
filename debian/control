@@ -229,8 +229,8 @@ Depends: ${shlibs:Depends},
          liblapack-dev | liblapack.so,
          libtbb-dev | libgcc-5-dev | libgcc-6-dev | libgcc-7-dev
          | libgcc-8-dev | libomp-dev | libomp-7-dev | libomp-8-dev,
-Enhances: libblas.so,
-          liblapack.so,
+Enhances: libblas.so, libblas64.so,
+          liblapack.so, liblapack64.so,
 Suggests: intel-mkl-doc         (= ${source:Version}),
 Description: Intel® Math Kernel Library (Intel® MKL) (Dev)
  Intel® Math Kernel Library (Intel® MKL) is a computing math library of highly
@@ -328,8 +328,8 @@ Depends: ${shlibs:Depends},
          libblas3 | libblas.so.3,
          liblapack3 | liblapack.so.3,
          libtbb2 | libgomp1 | libomp5 | libomp5-7 | libomp5-8,
-Enhances: libblas.so.3,
-          liblapack.so.3,
+Enhances: libblas.so.3, libblas64.so.3,
+          liblapack.so.3, liblapack64.so.3,
 Description: Intel® MKL: Single Dynamic Library (SDL)
  Intel® Math Kernel Library (Intel® MKL) is a computing math library of highly
  optimized, extensively threaded routines for applications that require
