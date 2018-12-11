@@ -149,9 +149,9 @@ if the user rejects to use MKL as default.
 
       $ dpkg-architecture -qDEB_HOST_MULTIARCH
 
-    By the way, GUI frontends of update-alternatives such as galternatives
-    will also work if you prefer them. For more information about usage
-    of update-alternatives, see manual page update-alternatives(1).
+    By the way, frontends of update-alternatives such as rover will also work
+    if you prefer them. For more information about usage of Debian's
+    alternatives mechanism,see manual page update-alternatives(1).
 
 (2) If you have NO root permission, but still want to change the default
     BLAS/LAPACK implementation for yourself, there are still solutions.
