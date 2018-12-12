@@ -1,3 +1,19 @@
+intel-mkl (2019.0.117-3) UNRELEASED; urgency=medium
+
+  * Misc update for README.Debian.
+  * Ease threading library dependency forlibmkl-rt and libmkl-dev.
+    Anyone of tbb, iomp and gomp would satisfy the dependency.
+    - Remove libomp-dev from autopkgtest depends.
+  * Update simple test programs.
+  * Provide libblas64 and liblapack64 alternatives.
+    + libmkl-rt  Enhances libblas64.so.3, liblapack64.so.3
+    + libmkl-dev Enhances libblas64.so,   liblapack64.so
+    + libmkl-rt  provides libblas64.so.3, liblapack64.so.3 via alternatives.
+    + libmkl-dev provides libblas64.so,   liblapack64.so   via alternatives.
+    * Only manipulate blas64/lapack64 alternatives on amd64.
+
+ -- Mo Zhou <cdluminate@gmail.com>  Wed, 12 Dec 2018 08:36:41 +0000
+
 intel-mkl (2019.0.117-2) unstable; urgency=medium
 
   * Export HOME=/tmp/ to fix FTBFS due to the failure that rpm would
