@@ -20,7 +20,8 @@ AUTOGEN_FILES       = $(patsubst %.in, %, $(wildcard debian/*.in debian/pkgconfi
 
 
 %:: %.in debian/rules
-	sed -e "s/@DEB_HOST_MULTIARCH@/$(DEB_HOST_MULTIARCH)/g" < $@.in > $@
+	sed -e "s/@DEB_HOST_MULTIARCH@/$(DEB_HOST_MULTIARCH)/g" \
+		-e "s/@DEB_HOST_ARCH@/$(DEB_HOST_ARCH)/g" < $@.in > $@
 
 %:
 	dh $@

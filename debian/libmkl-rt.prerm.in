@@ -12,7 +12,7 @@ if [ "$1" != "upgrade" ]; then
     update-alternatives --remove liblapack.so.3-@DEB_HOST_MULTIARCH@ \
                         /usr/lib/@DEB_HOST_MULTIARCH@/libmkl_rt.so
 
-    if [ "amd64" = $(dpkg --print-architecture) ]; then
+    if [ "amd64" = "@DEB_HOST_ARCH@" ]; then
 
     update-alternatives --remove libblas64.so.3-@DEB_HOST_MULTIARCH@ \
                         /usr/lib/@DEB_HOST_MULTIARCH@/libmkl_rt.so

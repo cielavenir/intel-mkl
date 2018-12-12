@@ -25,7 +25,7 @@ update-alternatives --install /usr/lib/@DEB_HOST_MULTIARCH@/liblapack.so \
                     lapack.pc-@DEB_HOST_MULTIARCH@ \
                     /usr/lib/@DEB_HOST_MULTIARCH@/pkgconfig/mkl-rt.pc
 
-if [ "amd64" = $(dpkg --print-architecture) ]; then
+if [ "amd64" = "@DEB_HOST_ARCH@" ]; then
 
   update-alternatives --install /usr/lib/@DEB_HOST_MULTIARCH@/libblas64.so \
                       libblas64.so-@DEB_HOST_MULTIARCH@ \
@@ -63,7 +63,7 @@ if [ "$RET" = "true" ]; then
                       /usr/lib/@DEB_HOST_MULTIARCH@/libmkl_rt.so
   fi
 
-  if [ "amd64" = $(dpkg --print-architecture) ]; then
+  if [ "amd64" = "@DEB_HOST_ARCH@" ]; then
 
     if (echo "$RET" | grep "libblas64.so" 1>/dev/null 2>&1); then
     update-alternatives --set libblas64.so-@DEB_HOST_MULTIARCH@ \
@@ -98,7 +98,7 @@ else
   fi
 
 
-  if [ "amd64" = $(dpkg --print-architecture) ]; then
+  if [ "amd64" = "@DEB_HOST_ARCH@" ]; then
 
     realblas64=$(update-alternatives --query libblas64.so-@DEB_HOST_MULTIARCH@ \
                | grep ^Value: | cut -d ' ' -f 2)
