@@ -28,24 +28,28 @@ update-alternatives --install /usr/lib/@DEB_HOST_MULTIARCH@/liblapack.so \
                     lapack.pc-@DEB_HOST_MULTIARCH@ \
                     /usr/lib/@DEB_HOST_MULTIARCH@/pkgconfig/mkl-rt.pc
 
-update-alternatives --install /usr/lib/@DEB_HOST_MULTIARCH@/libblas64.so \
-                    libblas64.so-@DEB_HOST_MULTIARCH@ \
-                    /usr/lib/@DEB_HOST_MULTIARCH@/libmkl_rt.so \
-                    $_mkl_rt_priority \
-                    --slave /usr/include/@DEB_HOST_MULTIARCH@/cblas.h \
-                    cblas.h-@DEB_HOST_MULTIARCH@ \
-                    /usr/include/mkl/mkl_cblas.h \
-                    --slave /usr/lib/@DEB_HOST_MULTIARCH@/pkgconfig/blas.pc \
-                    blas.pc-@DEB_HOST_MULTIARCH@ \
-                    /usr/lib/@DEB_HOST_MULTIARCH@/pkgconfig/mkl-rt-ilp64.pc
+if [ "amd64" = $(dpkg --print-architecture) ]; then
 
-update-alternatives --install /usr/lib/@DEB_HOST_MULTIARCH@/liblapack64.so \
-                    liblapack64.so-@DEB_HOST_MULTIARCH@ \
-                    /usr/lib/@DEB_HOST_MULTIARCH@/libmkl_rt.so \
-                    $_mkl_rt_priority \
-                    --slave /usr/lib/@DEB_HOST_MULTIARCH@/pkgconfig/lapack.pc \
-                    lapack.pc-@DEB_HOST_MULTIARCH@ \
-                    /usr/lib/@DEB_HOST_MULTIARCH@/pkgconfig/mkl-rt-ilp64.pc
+  update-alternatives --install /usr/lib/@DEB_HOST_MULTIARCH@/libblas64.so \
+                      libblas64.so-@DEB_HOST_MULTIARCH@ \
+                      /usr/lib/@DEB_HOST_MULTIARCH@/libmkl_rt.so \
+                      $_mkl_rt_priority \
+                      --slave /usr/include/@DEB_HOST_MULTIARCH@/cblas.h \
+                      cblas.h-@DEB_HOST_MULTIARCH@ \
+                      /usr/include/mkl/mkl_cblas.h \
+                      --slave /usr/lib/@DEB_HOST_MULTIARCH@/pkgconfig/blas.pc \
+                      blas.pc-@DEB_HOST_MULTIARCH@ \
+                      /usr/lib/@DEB_HOST_MULTIARCH@/pkgconfig/mkl-rt-ilp64.pc
+  
+  update-alternatives --install /usr/lib/@DEB_HOST_MULTIARCH@/liblapack64.so \
+                      liblapack64.so-@DEB_HOST_MULTIARCH@ \
+                      /usr/lib/@DEB_HOST_MULTIARCH@/libmkl_rt.so \
+                      $_mkl_rt_priority \
+                      --slave /usr/lib/@DEB_HOST_MULTIARCH@/pkgconfig/lapack.pc \
+                      lapack.pc-@DEB_HOST_MULTIARCH@ \
+                      /usr/lib/@DEB_HOST_MULTIARCH@/pkgconfig/mkl-rt-ilp64.pc
+
+fi
 
 db_get libmkl-rt/use-as-default-blas-lapack
 if [ "$RET" = "true" ]; then
@@ -65,15 +69,20 @@ if [ "$RET" = "true" ]; then
                       /usr/lib/@DEB_HOST_MULTIARCH@/libmkl_rt.so
   fi
 
-  if (echo "$RET" | grep "libblas64.so" 1>/dev/null 2>&1); then
-  update-alternatives --set libblas64.so-@DEB_HOST_MULTIARCH@ \
-                      /usr/lib/@DEB_HOST_MULTIARCH@/libmkl_rt.so
+  if [ "amd64" = $(dpkg --print-architecture) ]; then
+
+    if (echo "$RET" | grep "libblas64.so" 1>/dev/null 2>&1); then
+    update-alternatives --set libblas64.so-@DEB_HOST_MULTIARCH@ \
+                        /usr/lib/@DEB_HOST_MULTIARCH@/libmkl_rt.so
+    fi
+
+    if (echo "$RET" | grep "liblapack64.so" 1>/dev/null 2>&1); then
+    update-alternatives --set liblapack64.so-@DEB_HOST_MULTIARCH@ \
+                        /usr/lib/@DEB_HOST_MULTIARCH@/libmkl_rt.so
+    fi
+
   fi
 
-  if (echo "$RET" | grep "liblapack64.so" 1>/dev/null 2>&1); then
-  update-alternatives --set liblapack64.so-@DEB_HOST_MULTIARCH@ \
-                      /usr/lib/@DEB_HOST_MULTIARCH@/libmkl_rt.so
-  fi
 else
 
   # When user says "no", we do nothing. However if the user says "no" when
@@ -85,10 +94,6 @@ else
              | grep ^Value: | cut -d ' ' -f 2)
   reallapack=$(update-alternatives --query liblapack.so-@DEB_HOST_MULTIARCH@ \
                | grep ^Value: | cut -d ' ' -f 2)
-  realblas64=$(update-alternatives --query libblas64.so-@DEB_HOST_MULTIARCH@ \
-             | grep ^Value: | cut -d ' ' -f 2)
-  reallapack64=$(update-alternatives --query liblapack64.so-@DEB_HOST_MULTIARCH@ \
-               | grep ^Value: | cut -d ' ' -f 2)
 
   if [ "$realblas" = "/usr/lib/@DEB_HOST_MULTIARCH@/libmkl_rt.so" ]; then
     update-alternatives --auto libblas.so-@DEB_HOST_MULTIARCH@
@@ -98,12 +103,22 @@ else
     update-alternatives --auto liblapack.so-@DEB_HOST_MULTIARCH@
   fi
 
-  if [ "$realblas64" = "/usr/lib/@DEB_HOST_MULTIARCH@/libmkl_rt.so" ]; then
-    update-alternatives --auto libblas64.so-@DEB_HOST_MULTIARCH@
-  fi
 
-  if [ "$reallapack64" = "/usr/lib/@DEB_HOST_MULTIARCH@/libmkl_rt.so" ]; then
-    update-alternatives --auto liblapack64.so-@DEB_HOST_MULTIARCH@
+  if [ "amd64" = $(dpkg --print-architecture) ]; then
+
+    realblas64=$(update-alternatives --query libblas64.so-@DEB_HOST_MULTIARCH@ \
+               | grep ^Value: | cut -d ' ' -f 2)
+    reallapack64=$(update-alternatives --query liblapack64.so-@DEB_HOST_MULTIARCH@ \
+                 | grep ^Value: | cut -d ' ' -f 2)
+
+    if [ "$realblas64" = "/usr/lib/@DEB_HOST_MULTIARCH@/libmkl_rt.so" ]; then
+      update-alternatives --auto libblas64.so-@DEB_HOST_MULTIARCH@
+    fi
+
+    if [ "$reallapack64" = "/usr/lib/@DEB_HOST_MULTIARCH@/libmkl_rt.so" ]; then
+      update-alternatives --auto liblapack64.so-@DEB_HOST_MULTIARCH@
+    fi
+
   fi
 
   # We are sure that MKL will be unselected by putting these alternatives
