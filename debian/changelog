@@ -1,4 +1,4 @@
-intel-mkl (2019.0.117-3) UNRELEASED; urgency=medium
+intel-mkl (2019.0.117-3) unstable; urgency=medium
 
   * Misc update for README.Debian.
   * Ease threading library dependency forlibmkl-rt and libmkl-dev.
@@ -13,7 +13,7 @@ intel-mkl (2019.0.117-3) UNRELEASED; urgency=medium
     * Only manipulate blas64/lapack64 alternatives on amd64.
   * No longer provide slave links for cblas.h .
 
- -- Mo Zhou <cdluminate@gmail.com>  Wed, 12 Dec 2018 09:15:47 +0000
+ -- Mo Zhou <cdluminate@gmail.com>  Wed, 12 Dec 2018 15:06:52 +0000
 
 intel-mkl (2019.0.117-2) unstable; urgency=medium
 
