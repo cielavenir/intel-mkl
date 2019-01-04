@@ -1,19 +1,105 @@
-Test-Command: g++ debian/tests/test-gemm.cc -I/usr/include/mkl -lmkl_rt -lpthread -lm -ldl -liomp5 -o test; MKL_THREADING_LAYER=intel ./test
+# mkl_rt, LP64, sequential
+Test-Command: g++ debian/tests/test-gemm.cc -I/usr/include/mkl -m64 -Wl,--no-as-needed -lmkl_rt -lpthread -lm -ldl -o tester;
+ MKL_THREADING_LAYER=sequential MKL_INTERFACE_LAYER=lp64 ./tester
+Depends: intel-mkl, build-essential,
+Restrictions: allow-stderr
+
+# mkl_rt, LP64, iomp
+Test-Command: g++ debian/tests/test-gemm.cc -I/usr/include/mkl -m64 -Wl,--no-as-needed -lmkl_rt -lpthread -lm -ldl -o tester;
+ MKL_THREADING_LAYER=intel MKL_INTERFACE_LAYER=lp64 ./tester
 Depends: intel-mkl, build-essential, libomp-7-dev | libomp-8-dev | libomp-dev,
 Restrictions: allow-stderr
 
-Test-Command: g++ debian/tests/test-gemm.cc -I/usr/include/mkl -lmkl_rt -lpthread -lm -ldl -ltbb -o test; MKL_THREADING_LAYER=tbb ./test
-Depends: intel-mkl, build-essential, libtbb-dev,
-Restrictions: allow-stderr
-
-Test-Command: g++ debian/tests/test-gemm.cc -I/usr/include/mkl -lmkl_rt -lpthread -lm -ldl -lgomp -o test; MKL_THREADING_LAYER=gnu ./test
+# mkl_rt, LP64, gomp
+Test-Command: g++ debian/tests/test-gemm.cc -I/usr/include/mkl -m64 -Wl,--no-as-needed -lmkl_rt -lpthread -lm -ldl -o tester;
+ MKL_THREADING_LAYER=gnu MKL_INTERFACE_LAYER=lp64 ./tester
 Depends: intel-mkl, build-essential, libgcc-8-dev | libgcc-7-dev | libgcc-6-dev,
 Restrictions: allow-stderr
 
-Test-Command: gcc debian/tests/abi-blas.c -ldl -DBlasInt=__int32_t -o tester; MKL_INTERFACE_LAYER=lp64 ./tester
-Depends: libmkl-rt, build-essential,
+# mkl_rt, LP64, tbb
+Test-Command: g++ debian/tests/test-gemm.cc -I/usr/include/mkl -m64 -Wl,--no-as-needed -lmkl_rt -lpthread -lm -ldl -o tester;
+ MKL_THREADING_LAYER=tbb MKL_INTERFACE_LAYER=lp64 ./tester
+Depends: intel-mkl, build-essential, libtbb-dev,
 Restrictions: allow-stderr
 
+# mkl_rt, ILP64, sequential
+Test-Command: g++ debian/tests/test-gemm.cc -DMKL_ILP64 -I/usr/include/mkl -m64 -Wl,--no-as-needed -lmkl_rt -lpthread -lm -ldl -o tester;
+ MKL_THREADING_LAYER=sequential MKL_INTERFACE_LAYER=ilp64 ./tester
+Depends: intel-mkl, build-essential,
+Restrictions: allow-stderr
+
+# mkl_rt, ILP64, iomp
+Test-Command: g++ debian/tests/test-gemm.cc -DMKL_ILP64 -I/usr/include/mkl -m64 -Wl,--no-as-needed -lmkl_rt -lpthread -lm -ldl -o tester;
+ MKL_THREADING_LAYER=intel MKL_INTERFACE_LAYER=ilp64 ./tester
+Depends: intel-mkl, build-essential, libomp-7-dev | libomp-8-dev | libomp-dev,
+Restrictions: allow-stderr
+
+# mkl_rt, ILP64, gomp
+Test-Command: g++ debian/tests/test-gemm.cc -DMKL_ILP64 -I/usr/include/mkl -m64 -Wl,--no-as-needed -lmkl_rt -lpthread -lm -ldl -o tester;
+ MKL_THREADING_LAYER=gnu MKL_INTERFACE_LAYER=ilp64 ./tester
+Depends: intel-mkl, build-essential, libgcc-8-dev | libgcc-7-dev | libgcc-6-dev,
+Restrictions: allow-stderr
+
+# mkl_rt, ILP64, tbb
+Test-Command: g++ debian/tests/test-gemm.cc -DMKL_ILP64 -I/usr/include/mkl -m64 -Wl,--no-as-needed -lmkl_rt -lpthread -lm -ldl -o tester;
+ MKL_THREADING_LAYER=tbb MKL_INTERFACE_LAYER=ilp64 ./tester
+Depends: intel-mkl, build-essential, libtbb-dev,
+Restrictions: allow-stderr
+
+# dynamic, LP64, sequential
+Test-Command: g++ debian/tests/test-gemm.cc -I/usr/include/mkl -m64 -Wl,--no-as-needed -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lpthread -lm -ldl -o tester;
+ ./tester
+Depends: intel-mkl, build-essential,
+Restrictions: allow-stderr
+
+# dynamic, LP64, iomp
+Test-Command: g++ debian/tests/test-gemm.cc -I/usr/include/mkl -m64 -Wl,--no-as-needed -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -liomp5 -lpthread -lm -ldl -o tester;
+ ./tester
+Depends: intel-mkl, build-essential, libomp-7-dev | libomp-8-dev | libomp-dev,
+Restrictions: allow-stderr
+
+# dynamic, LP64, gomp
+Test-Command: g++ debian/tests/test-gemm.cc -I/usr/include/mkl -m64 -Wl,--no-as-needed -lmkl_intel_lp64 -lmkl_gnu_thread -lmkl_core -lgomp -lpthread -lm -ldl -o tester;
+ ./tester
+Depends: intel-mkl, build-essential, libgcc-8-dev | libgcc-7-dev | libgcc-6-dev,
+Restrictions: allow-stderr
+
+# dynamic, LP64, tbb
+Test-Command: g++ debian/tests/test-gemm.cc -I/usr/include/mkl -m64 -Wl,--no-as-needed -lmkl_intel_lp64 -lmkl_tbb_thread -lmkl_core -ltbb -lstdc++ -lpthread -lm -ldl -o tester;
+ ./tester
+Depends: intel-mkl, build-essential, libtbb-dev,
+Restrictions: allow-stderr
+
+# dynamic, ILP64, sequential
+Test-Command: g++ debian/tests/test-gemm.cc -DMKL_ILP64 -I/usr/include/mkl -m64 -Wl,--no-as-needed -lmkl_intel_ilp64 -lmkl_sequential -lmkl_core -lpthread -lm -ldl -o tester;
+ ./tester
+Depends: intel-mkl, build-essential,
+Restrictions: allow-stderr
+
+# dynamic, ILP64, iomp
+Test-Command: g++ debian/tests/test-gemm.cc -DMKL_ILP64 -I/usr/include/mkl -m64 -Wl,--no-as-needed -lmkl_intel_ilp64 -lmkl_intel_thread -lmkl_core -liomp5 -lpthread -lm -ldl -o tester;
+ ./tester
+Depends: intel-mkl, build-essential, libomp-7-dev | libomp-8-dev | libomp-dev,
+Restrictions: allow-stderr
+
+# dynamic, ILP64, gomp
+Test-Command: g++ debian/tests/test-gemm.cc -DMKL_ILP64 -I/usr/include/mkl -m64 -Wl,--no-as-needed -lmkl_intel_ilp64 -lmkl_gnu_thread -lmkl_core -lgomp -lpthread -lm -ldl -o tester;
+ ./tester
+Depends: intel-mkl, build-essential, libgcc-8-dev | libgcc-7-dev | libgcc-6-dev,
+Restrictions: allow-stderr
+
+# dynamic, ILP64, tbb
+Test-Command: g++ debian/tests/test-gemm.cc -DMKL_ILP64 -I/usr/include/mkl -m64 -Wl,--no-as-needed -lmkl_intel_ilp64 -lmkl_tbb_thread -lmkl_core -ltbb -lstdc++ -lpthread -lm -ldl -o tester;
+ ./tester
+Depends: intel-mkl, build-essential, libtbb-dev,
+Restrictions: allow-stderr
+
+# dlsym, LP64, iomp (default)
+Test-Command: gcc debian/tests/abi-blas.c -ldl -DBlasInt=__int32_t -o tester; MKL_INTERFACE_LAYER=lp64 ./tester
+Depends: libmkl-rt, build-essential, libomp-7-dev | libomp-8-dev | libomp-dev,
+Restrictions: allow-stderr
+
+# dlsym, ILP64, iomp (default)
 Test-Command: gcc debian/tests/abi-blas.c -ldl -DBlasInt=__int64_t -o tester; MKL_INTERFACE_LAYER=ilp64 ./tester
-Depends: libmkl-rt, build-essential,
+Depends: libmkl-rt, build-essential, libomp-7-dev | libomp-8-dev | libomp-dev,
 Restrictions: allow-stderr
