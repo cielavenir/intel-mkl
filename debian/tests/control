@@ -1,11 +1,19 @@
-Test-Command: g++ debian/tests/test-gemm.cc -I/usr/include/mkl -lmkl_rt -lpthread -lm -ldl -ltbb -o test; MKL_THREADING_LAYER=tbb ./test
-Depends: intel-mkl, build-essential, libtbb-dev,
-Restrictions: allow-stderr
-
 Test-Command: g++ debian/tests/test-gemm.cc -I/usr/include/mkl -lmkl_rt -lpthread -lm -ldl -liomp5 -o test; MKL_THREADING_LAYER=intel ./test
 Depends: intel-mkl, build-essential, libomp-7-dev | libomp-8-dev | libomp-dev,
 Restrictions: allow-stderr
 
+Test-Command: g++ debian/tests/test-gemm.cc -I/usr/include/mkl -lmkl_rt -lpthread -lm -ldl -ltbb -o test; MKL_THREADING_LAYER=tbb ./test
+Depends: intel-mkl, build-essential, libtbb-dev,
+Restrictions: allow-stderr
+
 Test-Command: g++ debian/tests/test-gemm.cc -I/usr/include/mkl -lmkl_rt -lpthread -lm -ldl -lgomp -o test; MKL_THREADING_LAYER=gnu ./test
 Depends: intel-mkl, build-essential, libgcc-8-dev | libgcc-7-dev | libgcc-6-dev,
+Restrictions: allow-stderr
+
+Test-Command: gcc debian/tests/abi-blas.c -ldl -DBlasInt=__int32_t -o tester; MKL_INTERFACE_LAYER=lp64 ./tester
+Depends: libmkl-rt, build-essential,
+Restrictions: allow-stderr
+
+Test-Command: gcc debian/tests/abi-blas.c -ldl -DBlasInt=__int64_t -o tester; MKL_INTERFACE_LAYER=ilp64 ./tester
+Depends: libmkl-rt, build-essential,
 Restrictions: allow-stderr
