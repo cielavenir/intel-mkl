@@ -7,7 +7,7 @@
 # pile of *.install files. Here all the *.install files are auto-generated
 # from python script debian/control.py .
 
-MKL_ORIG_TARBALL = l_mkl_2019.0.117.tgz
+MKL_ORIG_TARBALL = l_mkl_2019.1.144.tgz
 
 # debugging i386 builds on amd64. [not formal cross build but dirty hack]
 #export DEB_HOST_ARCH = i386
