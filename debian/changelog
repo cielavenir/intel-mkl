@@ -1,3 +1,11 @@
+intel-mkl (2019.1.144-1) UNRELEASED; urgency=medium
+
+  * New upstream release 2019.1.144
+  * Uscan: Monitor Tsinghua University's Anaconda mirror for MKL updates.
+    It looks like Intel has dropped the Pypi channel.
+
+ -- Mo Zhou <cdluminate@gmail.com>  Fri, 04 Jan 2019 03:17:49 +0000
+
 intel-mkl (2019.0.117-4) unstable; urgency=medium
 
   * Revert the removal of slave link for cblas.h.
