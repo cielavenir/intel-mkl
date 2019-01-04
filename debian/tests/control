@@ -12,7 +12,7 @@ Restrictions: allow-stderr
 
 # mkl_rt, LP64, gomp
 Test-Command: g++ debian/tests/test-gemm.cc -I/usr/include/mkl -m64 -Wl,--no-as-needed -lmkl_rt -lpthread -lm -ldl -o tester;
- MKL_THREADING_LAYER=gnu MKL_INTERFACE_LAYER=lp64 LD_LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/9/;/usr/lib/gcc/x86_64-linux-gnu/8/;/usr/lib/gcc/x86_64-linux-gnu/7/;/usr/lib/gcc/x86_64-linux-gnu/6/;/usr/lib/gcc/x86_64-linux-gnu/5/ ./tester
+ MKL_THREADING_LAYER=gnu MKL_INTERFACE_LAYER=lp64 LD_LIBRARY_PATH="/usr/lib/gcc/x86_64-linux-gnu/9/;/usr/lib/gcc/x86_64-linux-gnu/8/;/usr/lib/gcc/x86_64-linux-gnu/7/;/usr/lib/gcc/x86_64-linux-gnu/6/;/usr/lib/gcc/x86_64-linux-gnu/5/" ./tester
 Depends: intel-mkl, build-essential, libgcc-8-dev | libgcc-7-dev | libgcc-6-dev,
 Restrictions: allow-stderr
 
@@ -36,7 +36,7 @@ Restrictions: allow-stderr
 
 # mkl_rt, ILP64, gomp
 Test-Command: g++ debian/tests/test-gemm.cc -DMKL_ILP64 -I/usr/include/mkl -m64 -Wl,--no-as-needed -lmkl_rt -lpthread -lm -ldl -o tester;
- MKL_THREADING_LAYER=gnu MKL_INTERFACE_LAYER=ilp64 LD_LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/9/;/usr/lib/gcc/x86_64-linux-gnu/8/;/usr/lib/gcc/x86_64-linux-gnu/7/;/usr/lib/gcc/x86_64-linux-gnu/6/;/usr/lib/gcc/x86_64-linux-gnu/5/ ./tester
+ MKL_THREADING_LAYER=gnu MKL_INTERFACE_LAYER=ilp64 LD_LIBRARY_PATH="/usr/lib/gcc/x86_64-linux-gnu/9/;/usr/lib/gcc/x86_64-linux-gnu/8/;/usr/lib/gcc/x86_64-linux-gnu/7/;/usr/lib/gcc/x86_64-linux-gnu/6/;/usr/lib/gcc/x86_64-linux-gnu/5/" ./tester
 Depends: intel-mkl, build-essential, libgcc-8-dev | libgcc-7-dev | libgcc-6-dev,
 Restrictions: allow-stderr
 
