@@ -1,6 +1,10 @@
 Source: intel-mkl
 Section: non-free/science
+Homepage: https://software.intel.com/en-us/mkl
 Priority: optional
+Standards-Version: 4.3.0
+Vcs-Browser: https://salsa.debian.org/science-team/intel-mkl
+Vcs-Git: https://salsa.debian.org/science-team/intel-mkl.git
 Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
 Uploaders: Mo Zhou <cdluminate@gmail.com>,
 Build-Depends: debhelper (>=11~),
@@ -13,10 +17,6 @@ Build-Depends: debhelper (>=11~),
                rpm2cpio,
                debconf,
                po-debconf,
-Standards-Version: 4.2.1
-Homepage: https://software.intel.com/en-us/mkl
-Vcs-Browser: https://salsa.debian.org/science-team/intel-mkl
-Vcs-Git: https://salsa.debian.org/science-team/intel-mkl.git
 XS-Autobuild: yes
 
 # [ References ]
