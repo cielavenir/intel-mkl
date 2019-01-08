@@ -1,3 +1,4 @@
+# https://software.intel.com/en-us/mkl
 version=4
-https://pypi.org/project/mkl/ \
-    .*mkl-([\d.]+)-.+\.whl debian uupdate
+https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/linux-64/ \
+    mkl-([\d.]+-[\d.]+)\.tar.bz2 debian uupdate

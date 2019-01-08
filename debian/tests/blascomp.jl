@@ -11,15 +11,16 @@ const atlas      = "/usr/lib/x86_64-linux-gnu/atlas/libblas.so.3.10.3"
 const openblas   = "/usr/lib/x86_64-linux-gnu/openblas/libblas.so.3"
 const mkl        = "/usr/lib/x86_64-linux-gnu/libmkl_rt.so"
 const blis       = "/home/lumin/git/blis/lib/haswell/libblis.so"
+const BlasInt    = Int64
 
-BLASES = [blis, openblas, mkl]
+BLASES = [openblas, mkl]
 
 julia_nrm2 = false
 for libblas in BLASES
 	global julia_nrm2
 	@eval begin
-		function ffi_nrm2(n::Integer, X::Union{Ptr{Float64}, AbstractArray{Float64}}, incx::Integer)
-			ccall((:dnrm2_, $libblas), Float64, (Ref{Int64}, Ptr{Float64}, Ref{Int64}), n, X, incx)
+		function ffi_nrm2(n::BlasInt, X::Union{Ptr{Float64}, AbstractArray{Float64}}, incx::BlasInt)
+			ccall((:dnrm2_, $libblas), Float64, (Ref{BlasInt}, Ptr{Float64}, Ref{BlasInt}), n, X, incx)
 		end
 	end
 	x = rand(N1)
@@ -30,54 +31,12 @@ for libblas in BLASES
 		julia_nrm2 = true
 	end
 	@info("dnrm2 $libblas")
-	ffi_nrm2(N1, x, 1)  # JIT
-	@time ffi_nrm2(N1, x, 1)
+	ffi_nrm2(N1 |> BlasInt, x, 1 |> BlasInt)  # JIT
+	@time ffi_nrm2(N1 |> BlasInt, x, 1 |> BlasInt)
 
-	error = abs(norm(x) - ffi_nrm2(N1, x, 1))
+	error = abs(norm(x) - ffi_nrm2(N1 |> BlasInt, x, 1 |> BlasInt))
 	if error > 1e-7
 		@warn("dnrm2 Error : $error") # correctness
-	end
-end
-
-julia_sgemm = false
-for libblas in BLASES
-	global julia_sgemm
-	@eval begin
-		function ffi_gemm!(transA::Char, transB::Char,
-						   alpha::Float32, A::AbstractVecOrMat{Float32},
-						   B::AbstractVecOrMat{Float32}, beta::Float32,
-						   C::AbstractVecOrMat{Float32})
-			m = size(A, transA == 'N' ? 1 : 2)
-            ka = size(A, transA == 'N' ? 2 : 1)
-            kb = size(B, transB == 'N' ? 1 : 2)
-            n = size(B, transB == 'N' ? 2 : 1) 
-            ccall((:sgemm_, $libblas), Cvoid,
-                (Ref{UInt8}, Ref{UInt8}, Ref{Int32}, Ref{Int32},
-                 Ref{Int32}, Ref{Float32}, Ptr{Float32}, Ref{Int32},
-                 Ptr{Float32}, Ref{Int32}, Ref{Float32}, Ptr{Float32},
-                 Ref{Int32}),
-                 transA, transB, m, n,
-                 ka, alpha, A, max(1,stride(A,2)),
-                 B, max(1,stride(B,2)), beta, C,
-                 max(1,stride(C,2)))
-		end
-	end
-	x, y, z = rand(Float32, N3, N3), rand(Float32, N3, N3), zeros(Float32, N3, N3)
-	if !julia_sgemm
-		@info("sgemm Julia")
-		BLAS.gemm('N', 'N', x, y)  # JIT
-		@time BLAS.gemm('N', 'N', x, y)
-		julia_sgemm = true
-	end
-	@info("sgemm $libblas")
-	ffi_gemm!('N', 'N', 1. |>Float32, x, y, 0. |>Float32, z)  # JIT
-	@time ffi_gemm!('N', 'N', 1. |>Float32, x, y, 0. |> Float32, z)
-
-	z2 = BLAS.gemm('N', 'N', x, y)
-	ffi_gemm!('N', 'N', 1. |>Float32, x, y, 0. |>Float32, z)
-	error = norm(z2 - z)
-	if error > 1e-7
-		@warn("sgemm Error : $error")  # correctness
 	end
 end
 
@@ -94,10 +53,10 @@ for libblas in BLASES
             kb = size(B, transB == 'N' ? 1 : 2)
             n = size(B, transB == 'N' ? 2 : 1) 
             ccall((:dgemm_, $libblas), Cvoid,
-                (Ref{UInt8}, Ref{UInt8}, Ref{Int64}, Ref{Int64},
-                 Ref{Int64}, Ref{Float64}, Ptr{Float64}, Ref{Int64},
-                 Ptr{Float64}, Ref{Int64}, Ref{Float64}, Ptr{Float64},
-                 Ref{Int64}),
+                (Ref{UInt8}, Ref{UInt8}, Ref{BlasInt}, Ref{BlasInt},
+                 Ref{BlasInt}, Ref{Float64}, Ptr{Float64}, Ref{BlasInt},
+                 Ptr{Float64}, Ref{BlasInt}, Ref{Float64}, Ptr{Float64},
+                 Ref{BlasInt}),
                  transA, transB, m, n,
                  ka, alpha, A, max(1,stride(A,2)),
                  B, max(1,stride(B,2)), beta, C,

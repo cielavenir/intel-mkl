@@ -1,6 +1,6 @@
 .PHONY: default
 
-BIN= catalog testdgemm
+BIN= catalog test-gemm
 
 default: $(BIN)
 

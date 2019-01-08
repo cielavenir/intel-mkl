@@ -1,0 +1,9 @@
+prefix=/usr
+exec_prefix=${prefix}
+includedir=${prefix}/include/mkl
+
+Name: mkl-sdl-lp64
+Version: debian
+Description: Debian Specific pkg-config for MKL SDL
+Libs: -lmkl_rt -lpthread -lm -ldl
+Cflags: -I${includedir} -m64
