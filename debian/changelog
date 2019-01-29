@@ -1,4 +1,4 @@
-intel-mkl (2019.1.144-4) UNRELEASED; urgency=medium
+intel-mkl (2019.1.144-4) unstable; urgency=medium
 
   * Make dependency on libomp-dev mandatory since iomp5 is the default
     threading model used by libmkl-rt. Also make libmkl-rt depend on
@@ -8,7 +8,7 @@ intel-mkl (2019.1.144-4) UNRELEASED; urgency=medium
   * Replace embedded jquery in documentation/ja with symlink to libjs-jquery.
   * Fix a spelling error in README.Debian.
 
- -- Mo Zhou <cdluminate@gmail.com>  Tue, 29 Jan 2019 03:23:26 +0000
+ -- Mo Zhou <cdluminate@gmail.com>  Tue, 29 Jan 2019 08:51:40 +0000
 
 intel-mkl (2019.1.144-3) unstable; urgency=medium
 
