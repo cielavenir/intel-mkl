@@ -227,9 +227,8 @@ Depends: ${shlibs:Depends},
          pkg-config,
          libblas-dev | libblas.so,
          liblapack-dev | liblapack.so,
-         libomp-dev | libomp-7-dev | libomp-8-dev
-         | libgcc-5-dev | libgcc-6-dev | libgcc-7-dev | libgcc-8-dev
-         | libtbb-dev,
+         libomp-dev | libomp-7-dev | libomp-8-dev,
+         libgcc-5-dev | libgcc-6-dev | libgcc-7-dev | libgcc-8-dev | libtbb-dev,
 Enhances: libblas.so, libblas64.so,
           liblapack.so, liblapack64.so,
 Suggests: intel-mkl-doc         (= ${source:Version}),
@@ -328,9 +327,8 @@ Depends: ${shlibs:Depends},
          libmkl-locale (= ${binary:Version}),
          libblas3 | libblas.so.3,
          liblapack3 | liblapack.so.3,
-         libomp5 | libomp5-7 | libomp5-8
-         | libgomp1
-         | libtbb2,
+         libomp-dev | libomp-7-dev | libomp-8-dev,
+         libgcc-5-dev | libgcc-6-dev | libgcc-7-dev | libgcc-8-dev | libtbb-dev,
 Enhances: libblas.so.3, libblas64.so.3,
           liblapack.so.3, liblapack64.so.3,
 Description: Intel® MKL: Single Dynamic Library (SDL)
