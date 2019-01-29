@@ -53,6 +53,9 @@ override_dh_auto_configure: autogen
 	$(RM) opt/intel/documentation_2019/en/mkl/ps2019/resources/jquery-1.11.1.min.js
 	ln -s /usr/share/javascript/jquery/jquery.min.js \
 		opt/intel/documentation_2019/en/mkl/ps2019/resources/jquery-1.11.1.min.js
+	$(RM) opt/intel/documentation_2019/ja/mkl/ps2019/resources/jquery-1.11.1.min.js
+	ln -s /usr/share/javascript/jquery/jquery.min.js \
+		opt/intel/documentation_2019/ja/mkl/ps2019/resources/jquery-1.11.1.min.js
 
 override_dh_auto_clean:
 	debconf-updatepo
