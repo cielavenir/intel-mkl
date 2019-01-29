@@ -78,7 +78,7 @@ Please refer upstream documentation for more detail:
 (*) Guide: Performance
 -------------------------------------------------------------------------------
 
-If the preformance drop is not introduced by mixing the usage of different
+If the performance drop is not introduced by mixing the usage of different
 threading libraries, tweaking environment variable MKL_NUM_THREADS might
 help. Refer upstream doc for more detail:
 
