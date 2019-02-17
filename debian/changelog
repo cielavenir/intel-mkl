@@ -1,8 +1,9 @@
-intel-mkl (2019.2.187-1) UNRELEASED; urgency=medium
+intel-mkl (2019.2.187-1) unstable; urgency=medium
 
   * New upstream release 2019.2.187
+  * Update md5 checksum for 2019.2.187 orig tarball.
 
- -- Mo Zhou <cdluminate@gmail.com>  Sun, 17 Feb 2019 07:29:57 +0000
+ -- Mo Zhou <cdluminate@gmail.com>  Sun, 17 Feb 2019 07:51:05 +0000
 
 intel-mkl (2019.1.144-4) unstable; urgency=medium
 
