@@ -1,5 +1,4 @@
-// This file is used to test correctness of cblas header / library packaging.
-// Although can be used as a very rough benchmarker.
+// This file is used to test correctness of blas packaging.
 // g++ test-gemm.cc $(pkg-config --libs --cflags mkl-rt)
 // Author: M. Zhou <lumin@debian.org>
 
@@ -111,6 +110,7 @@ main(int argc, char* argv[])
 				(tv_end.tv_sec*1e6 + tv_end.tv_usec
 				 - tv_start.tv_sec*1e6  - tv_start.tv_usec)/4e3);
 	}
+	free(x); free(y); free(z);
 
 	return 0;
 }
