@@ -1,3 +1,9 @@
+intel-mkl (2019.5.281-1) UNRELEASED; urgency=medium
+
+  * New upstream release 2019.5.281 (Aug 2019)
+
+ -- Mo Zhou <cdluminate@gmail.com>  Sat, 28 Sep 2019 06:12:42 +0000
+
 intel-mkl (2019.4.243-1) unstable; urgency=medium
 
   * New upstream release 2019.4.243
