@@ -7,7 +7,7 @@
 # pile of *.install files. Here all the *.install files are auto-generated
 # from python script debian/control.py .
 
-MKL_ORIG_TARBALL = intel-mkl_2019.5.281.orig.tar.gz
+MKL_ORIG_TARBALL = intel-mkl_2020.0.166.orig.tar.gz
 
 # debugging i386 builds on amd64. [not formal cross build but dirty hack]
 #export DEB_HOST_ARCH = i386
@@ -34,12 +34,12 @@ checksum:
 extract-rpms: checksum
 	rpm --import PUBLIC_KEY.PUB
 	rpm -qa
-	rpm -qi gpg-pubkey-1911e097-57eb894d
+	rpm -qi gpg-pubkey-7e6c5dbe-5d91bb57
 	set -e; for rpmfile in $$(find rpm -type f -name '*.rpm' | sort); do \
 		rpm -K $$rpmfile; \
 		rpm2cpio $$rpmfile | cpio -idmv; \
 		done
-	rpm -e gpg-pubkey-1911e097-57eb894d
+	rpm -e gpg-pubkey-7e6c5dbe-5d91bb57
 
 autogen: extract-rpms $(AUTOGEN_FILES)
 	chmod +x debian/libmkl-rt.postinst  debian/libmkl-rt.prerm   debian/libmkl-rt.config
@@ -50,12 +50,12 @@ override_dh_auto_configure: autogen
 	python3 debian/control.py  # Generate install files and lintian overrides
 
 	# deal with embedded libjs-jquery
-	$(RM) opt/intel/documentation_2019/en/mkl/ps2019/resources/jquery-1.11.1.min.js
+	$(RM) opt/intel/documentation_2020/en/mkl/ps2020/resources/jquery-1.11.1.min.js
 	ln -s /usr/share/javascript/jquery/jquery.min.js \
-		opt/intel/documentation_2019/en/mkl/ps2019/resources/jquery-1.11.1.min.js
-	$(RM) opt/intel/documentation_2019/ja/mkl/ps2019/resources/jquery-1.11.1.min.js
+		opt/intel/documentation_2020/en/mkl/ps2020/resources/jquery-1.11.1.min.js
+	$(RM) opt/intel/documentation_2020/ja/mkl/ps2020/resources/jquery-1.11.1.min.js
 	ln -s /usr/share/javascript/jquery/jquery.min.js \
-		opt/intel/documentation_2019/ja/mkl/ps2019/resources/jquery-1.11.1.min.js
+		opt/intel/documentation_2020/ja/mkl/ps2020/resources/jquery-1.11.1.min.js
 
 override_dh_auto_clean:
 	debconf-updatepo
