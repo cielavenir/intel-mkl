@@ -1,3 +1,10 @@
+intel-mkl (2020.0.166-1) UNRELEASED; urgency=medium
+
+  * New upstream release 2020.0.166 (Dec 2019)
+  * Update my mail address in control and copyright.
+
+ -- Mo Zhou <lumin@debian.org>  Mon, 17 Feb 2020 09:44:12 +0800
+
 intel-mkl (2019.5.281-1) unstable; urgency=medium
 
   * New upstream release 2019.5.281 (Aug 2019)
