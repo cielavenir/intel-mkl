@@ -17,6 +17,7 @@ Build-Depends: debhelper-compat (= 11),
                rpm2cpio,
                debconf,
                po-debconf,
+Rules-Requires-Root: no
 XS-Autobuild: yes
 
 # [ References ]
