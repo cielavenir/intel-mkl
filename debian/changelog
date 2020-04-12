@@ -1,3 +1,9 @@
+intel-mkl (2020.1.217-1) UNRELEASED; urgency=medium
+
+  * New upstream release 2020.1.217 (26 Mar 2020)
+
+ -- Mo Zhou <lumin@debian.org>  Sun, 12 Apr 2020 20:00:37 +0800
+
 intel-mkl (2020.0.166-1) unstable; urgency=medium
 
   * New upstream release 2020.0.166 (Dec 2019)
