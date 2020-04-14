@@ -1,3 +1,9 @@
+intel-mkl (2020.1.217-2) unstable; urgency=medium
+
+  * Amend the installation path in control.py fixing i386 FTBFS.
+
+ -- Mo Zhou <lumin@debian.org>  Tue, 14 Apr 2020 21:01:22 +0800
+
 intel-mkl (2020.1.217-1) unstable; urgency=medium
 
   * New upstream release 2020.1.217 (26 Mar 2020)
