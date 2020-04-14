@@ -153,7 +153,7 @@ def installTools(filelist: List[str],
     print('# Tools')
     _, rest = eGrep(filelist, '.*/linux/mkl/tools/.*')
     installFile(
-            'opt/intel/compilers_and_libraries_*/linux/mkl/tools/mkl_link_tool',
+            'opt/intel/compilers_and_libraries_*/linux/mkl/bin/mkl_link_tool',
             'intel-mkl-linktool', 'usr/bin/')
     installFile(
             'opt/intel/compilers_and_libraries_*/linux/mkl/tools/builder',
