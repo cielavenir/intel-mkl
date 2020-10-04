@@ -228,8 +228,8 @@ Depends: ${shlibs:Depends},
          pkg-config,
          libblas-dev | libblas.so,
          liblapack-dev | liblapack.so,
-         libomp-dev | libomp-7-dev | libomp-8-dev,
-         libgcc-5-dev | libgcc-6-dev | libgcc-7-dev | libgcc-8-dev | libtbb-dev,
+         libomp-dev | libomp-8-dev | libomp-9-dev | libomp-10-dev | libomp-11-dev | libomp-12-dev | libomp-13-dev | libomp-14-dev | libomp-x.y-dev,
+         libgcc-8-dev | libgcc-9-dev | libgcc-10-dev | libgcc-11-dev | libgcc-12-dev | libtbb-dev,
 Enhances: libblas.so, libblas64.so,
           liblapack.so, liblapack64.so,
 Suggests: intel-mkl-doc         (= ${source:Version}),
@@ -262,7 +262,7 @@ Architecture: amd64 i386
 Multi-Arch: same
 Depends: ${misc:Depends},
          libmkl-meta-threading (= ${binary:Version}),
-Recommends: libtbb-dev, libomp-dev,
+Recommends: libtbb-dev, libomp-dev | libomp-x.y-dev,
 Description: Static libs of intel-MKL: Threading Layer
  Intel® Math Kernel Library (Intel® MKL) is a computing math library of highly
  optimized, extensively threaded routines for applications that require
@@ -328,8 +328,8 @@ Depends: ${shlibs:Depends},
          libmkl-locale (= ${binary:Version}),
          libblas3 | libblas.so.3,
          liblapack3 | liblapack.so.3,
-         libomp-dev | libomp-7-dev | libomp-8-dev,
-         libgcc-5-dev | libgcc-6-dev | libgcc-7-dev | libgcc-8-dev | libtbb-dev,
+         libomp-dev | libomp-8-dev | libomp-9-dev | libomp-10-dev | libomp-11-dev | libomp-12-dev | libomp-13-dev | libomp-14-dev | libomp-x.y-dev,
+         libgcc-8-dev | libgcc-9-dev | libgcc-10-dev | libgcc-11-dev | libgcc-12-dev | libtbb-dev,
 Enhances: libblas.so.3, libblas64.so.3,
           liblapack.so.3, liblapack64.so.3,
 Description: Intel® MKL: Single Dynamic Library (SDL)
