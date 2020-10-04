@@ -1,10 +1,12 @@
 intel-mkl (2020.3.279-1) unstable; urgency=medium
 
-  * New upstream release 2020.3.279 (31 Aug 2020)
+  * New upstream release 2020.3.279 (31 Aug 2020) (Closes: #944095)
   * Update the MD5 sum and the URL in d/rules accordingly.
   * Don't install the non-existing sample files to the doc package.
+  * Rebuild RPM DB to avoid db DB_VERSION_MISMATCH error.
+  * Update the libomp-*-dev and libgcc-*-dev runtime deps. (Closes: #963991)
 
- -- Mo Zhou <lumin@debian.org>  Sun, 04 Oct 2020 19:12:19 +0800
+ -- Mo Zhou <lumin@debian.org>  Sun, 04 Oct 2020 21:31:43 +0800
 
 intel-mkl (2020.1.217-2) unstable; urgency=medium
 
