@@ -171,8 +171,8 @@ def installDocs(filelist: List[str],
     _, rest = eGrep(rest, '^opt/intel/samples.*')
     installFile('opt/intel/documentation_*',
                 'intel-mkl-doc', 'usr/share/doc/intel-mkl/')
-    installFile('opt/intel/samples_*',
-                'intel-mkl-doc', 'usr/share/doc/intel-mkl/')
+    #installFile('opt/intel/samples_*',
+    #            'intel-mkl-doc', 'usr/share/doc/intel-mkl/')
     return rest
 
 
