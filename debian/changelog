@@ -1,3 +1,10 @@
+intel-mkl (2020.3.279-1) UNRELEASED; urgency=medium
+
+  * New upstream release 2020.3.279 (31 Aug 2020)
+  * Update the MD5 sum and the URL in d/rules accordingly.
+
+ -- Mo Zhou <lumin@debian.org>  Sun, 04 Oct 2020 18:07:38 +0800
+
 intel-mkl (2020.1.217-2) unstable; urgency=medium
 
   * Amend the installation path in control.py fixing i386 FTBFS.
