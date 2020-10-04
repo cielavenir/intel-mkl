@@ -33,6 +33,7 @@ checksum:
 		echo "[1;31mERROR, md5sum check failed for some reason.[;m"
 
 extract-rpms: checksum
+	rpm --rebuilddb
 	rpm --import PUBLIC_KEY.PUB
 	rpm -qa
 	rpm -qi gpg-pubkey-7e6c5dbe-5d91bb57
