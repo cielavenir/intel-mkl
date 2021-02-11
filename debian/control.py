@@ -233,8 +233,7 @@ def _override(package: str, overrides: List[str]) -> None:
     '''
     Write a lintian override file for specified package
     '''
-    __file = __file__
-    overrides = [f'# Automatically overridden by {__file}'] + overrides
+    overrides = [f'# Automatically overridden by debian/control.py'] + overrides
     print(f'lintian overrides for {package} ...')
     with open(f'debian/{package}.lintian-overrides', 'a') as f:
         f.writelines(x + '\n' for x in overrides)
