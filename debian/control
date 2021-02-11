@@ -230,7 +230,7 @@ Depends: ${shlibs:Depends},
          liblapack-dev | liblapack.so,
 Recommends:
 # for iomp (but its debian packaging is not multi-arch installable
-         libomp-dev | libomp-11-dev | libomp-12-dev | libomp-13-dev | libomp-14-dev | libomp-x.y-dev [amd64],
+         libomp-dev | libomp-11-dev | libomp-12-dev | libomp-13-dev | libomp-14-dev | libomp-x.y-dev,
 # for gomp
          libgcc-10-dev | libgcc-11-dev | libgcc-12-dev,
 # for tbb
@@ -335,7 +335,7 @@ Depends: ${shlibs:Depends},
          liblapack3 | liblapack.so.3,
 Recommends:
 # for iomp (but its debian packaging is not multi-arch installable
-         libomp-dev | libomp-11-dev | libomp-12-dev | libomp-13-dev | libomp-14-dev | libomp-x.y-dev [amd64],
+         libomp-dev | libomp-11-dev | libomp-12-dev | libomp-13-dev | libomp-14-dev | libomp-x.y-dev,
 # for gomp
          libgcc-10-dev | libgcc-11-dev | libgcc-12-dev,
 # for tbb
