@@ -1,3 +1,10 @@
+intel-mkl (2020.4.304-2) unstable; urgency=medium
+
+  * Make auto-generated lintian overrides reproducible. (Closes: #980518)
+  * Move threading deps from Depends to Recommends.
+
+ -- Mo Zhou <lumin@debian.org>  Thu, 11 Feb 2021 13:41:53 +0800
+
 intel-mkl (2020.4.304-1) unstable; urgency=medium
 
   * New upstream release 2020.4.304
