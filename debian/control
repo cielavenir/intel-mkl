@@ -228,8 +228,13 @@ Depends: ${shlibs:Depends},
          pkg-config,
          libblas-dev | libblas.so,
          liblapack-dev | liblapack.so,
-         libomp-dev | libomp-8-dev | libomp-9-dev | libomp-10-dev | libomp-11-dev | libomp-12-dev | libomp-13-dev | libomp-14-dev | libomp-x.y-dev,
-         libgcc-8-dev | libgcc-9-dev | libgcc-10-dev | libgcc-11-dev | libgcc-12-dev | libtbb-dev,
+Recommends:
+# for iomp (but its debian packaging is not multi-arch installable
+         libomp-dev | libomp-11-dev | libomp-12-dev | libomp-13-dev | libomp-14-dev | libomp-x.y-dev [amd64],
+# for gomp
+         libgcc-10-dev | libgcc-11-dev | libgcc-12-dev,
+# for tbb
+         libtbb-dev
 Enhances: libblas.so, libblas64.so,
           liblapack.so, liblapack64.so,
 Suggests: intel-mkl-doc         (= ${source:Version}),
@@ -328,8 +333,13 @@ Depends: ${shlibs:Depends},
          libmkl-locale (= ${binary:Version}),
          libblas3 | libblas.so.3,
          liblapack3 | liblapack.so.3,
-         libomp-dev | libomp-8-dev | libomp-9-dev | libomp-10-dev | libomp-11-dev | libomp-12-dev | libomp-13-dev | libomp-14-dev | libomp-x.y-dev,
-         libgcc-8-dev | libgcc-9-dev | libgcc-10-dev | libgcc-11-dev | libgcc-12-dev | libtbb-dev,
+Recommends:
+# for iomp (but its debian packaging is not multi-arch installable
+         libomp-dev | libomp-11-dev | libomp-12-dev | libomp-13-dev | libomp-14-dev | libomp-x.y-dev [amd64],
+# for gomp
+         libgcc-10-dev | libgcc-11-dev | libgcc-12-dev,
+# for tbb
+         libtbb-dev
 Enhances: libblas.so.3, libblas64.so.3,
           liblapack.so.3, liblapack64.so.3,
 Description: Intel® MKL: Single Dynamic Library (SDL)
