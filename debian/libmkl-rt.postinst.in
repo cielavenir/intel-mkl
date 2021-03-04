@@ -8,29 +8,15 @@ set -e
 # This should be safe enough if the package depends on a free alternative.
 _mkl_rt_priority=1
 
-update-alternatives --install /usr/lib/@DEB_HOST_MULTIARCH@/libblas.so.3 \
-                    libblas.so.3-@DEB_HOST_MULTIARCH@ \
+update-alternatives --install /usr/lib/libblas.so.3 \
+                    libblas.so.3 \
                     /usr/lib/@DEB_HOST_MULTIARCH@/libmkl_rt.so \
                     $_mkl_rt_priority
 
-update-alternatives --install /usr/lib/@DEB_HOST_MULTIARCH@/liblapack.so.3 \
-                    liblapack.so.3-@DEB_HOST_MULTIARCH@ \
+update-alternatives --install /usr/lib/liblapack.so.3 \
+                    liblapack.so.3 \
                     /usr/lib/@DEB_HOST_MULTIARCH@/libmkl_rt.so \
                     $_mkl_rt_priority
-
-if [ "amd64" = "@DEB_HOST_ARCH@" ]; then
-
-  update-alternatives --install /usr/lib/@DEB_HOST_MULTIARCH@/libblas64.so.3 \
-                      libblas64.so.3-@DEB_HOST_MULTIARCH@ \
-                      /usr/lib/@DEB_HOST_MULTIARCH@/libmkl_rt.so \
-                      $_mkl_rt_priority
-  
-  update-alternatives --install /usr/lib/@DEB_HOST_MULTIARCH@/liblapack64.so.3 \
-                      liblapack64.so.3-@DEB_HOST_MULTIARCH@ \
-                      /usr/lib/@DEB_HOST_MULTIARCH@/libmkl_rt.so \
-                      $_mkl_rt_priority
-
-fi
 
 db_get libmkl-rt/use-as-default-blas-lapack
 if [ "$RET" = "true" ]; then
@@ -41,27 +27,13 @@ if [ "$RET" = "true" ]; then
   db_get libmkl-rt/exact-so-3-selections
 
   if (echo "$RET" | grep "libblas.so" 1>/dev/null 2>&1 ); then
-  update-alternatives --set libblas.so.3-@DEB_HOST_MULTIARCH@ \
+  update-alternatives --set libblas.so.3 \
                       /usr/lib/@DEB_HOST_MULTIARCH@/libmkl_rt.so
   fi
 
   if (echo "$RET" | grep "liblapack.so" 1>/dev/null 2>&1); then
-  update-alternatives --set liblapack.so.3-@DEB_HOST_MULTIARCH@ \
+  update-alternatives --set liblapack.so.3 \
                       /usr/lib/@DEB_HOST_MULTIARCH@/libmkl_rt.so
-  fi
-
-  if [ "amd64" = "@DEB_HOST_ARCH@" ]; then
-
-    if (echo "$RET" | grep "libblas64.so" 1>/dev/null 2>&1 ); then
-    update-alternatives --set libblas64.so.3-@DEB_HOST_MULTIARCH@ \
-                        /usr/lib/@DEB_HOST_MULTIARCH@/libmkl_rt.so
-    fi
-
-    if (echo "$RET" | grep "liblapack64.so" 1>/dev/null 2>&1); then
-    update-alternatives --set liblapack64.so.3-@DEB_HOST_MULTIARCH@ \
-                        /usr/lib/@DEB_HOST_MULTIARCH@/libmkl_rt.so
-    fi
-
   fi
 
 else
@@ -71,35 +43,19 @@ else
   # mode.
   echo "Unselecting MKL if they were previously selected." 1>&2
 
-  realblas=$(update-alternatives --query libblas.so.3-@DEB_HOST_MULTIARCH@ \
+  realblas=$(update-alternatives --query libblas.so.3 \
              | grep ^Value: | cut -d ' ' -f 2)
-  reallapack=$(update-alternatives --query liblapack.so.3-@DEB_HOST_MULTIARCH@ \
+  reallapack=$(update-alternatives --query liblapack.so.3 \
                | grep ^Value: | cut -d ' ' -f 2)
 
   if [ "$realblas" = "/usr/lib/@DEB_HOST_MULTIARCH@/libmkl_rt.so" ]; then
-    update-alternatives --auto libblas.so.3-@DEB_HOST_MULTIARCH@
+    update-alternatives --auto libblas.so.3
   fi
 
   if [ "$reallapack" = "/usr/lib/@DEB_HOST_MULTIARCH@/libmkl_rt.so" ]; then
-    update-alternatives --auto liblapack.so.3-@DEB_HOST_MULTIARCH@
+    update-alternatives --auto liblapack.so.3
   fi
 
-  if [ "amd64" = "@DEB_HOST_ARCH@" ]; then
-
-    realblas64=$(update-alternatives --query libblas64.so.3-@DEB_HOST_MULTIARCH@ \
-               | grep ^Value: | cut -d ' ' -f 2)
-    reallapack64=$(update-alternatives --query liblapack64.so.3-@DEB_HOST_MULTIARCH@ \
-                 | grep ^Value: | cut -d ' ' -f 2)
-
-    if [ "$realblas64" = "/usr/lib/@DEB_HOST_MULTIARCH@/libmkl_rt.so" ]; then
-      update-alternatives --auto libblas64.so.3-@DEB_HOST_MULTIARCH@
-    fi
-
-    if [ "$reallapack64" = "/usr/lib/@DEB_HOST_MULTIARCH@/libmkl_rt.so" ]; then
-      update-alternatives --auto liblapack64.so.3-@DEB_HOST_MULTIARCH@
-    fi
-
-  fi
   # We are sure that MKL will be unselected by putting these alternatives
   # back into auto mode, because this package depends on free alternatives.
 
