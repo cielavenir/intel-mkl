@@ -6,21 +6,11 @@ set -e
 
 if [ "$1" != "upgrade" ]; then
 
-    update-alternatives --remove libblas.so-@DEB_HOST_MULTIARCH@ \
+    update-alternatives --remove libblas.so \
                         /usr/lib/@DEB_HOST_MULTIARCH@/libmkl_rt.so
 
-    update-alternatives --remove liblapack.so-@DEB_HOST_MULTIARCH@ \
+    update-alternatives --remove liblapack.so \
                         /usr/lib/@DEB_HOST_MULTIARCH@/libmkl_rt.so
-
-    if [ "amd64" = "@DEB_HOST_ARCH@" ]; then
-
-    update-alternatives --remove libblas64.so-@DEB_HOST_MULTIARCH@ \
-                        /usr/lib/@DEB_HOST_MULTIARCH@/libmkl_rt.so
-
-    update-alternatives --remove liblapack64.so-@DEB_HOST_MULTIARCH@ \
-                        /usr/lib/@DEB_HOST_MULTIARCH@/libmkl_rt.so
-
-    fi
 
 fi
 
